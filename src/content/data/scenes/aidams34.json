@@ -7,28 +7,14 @@
     "age": 20.4,
     "mandatory": true,
     "title": "Exchange Destination",
-    "text": "Year 3 means exchange, no exceptions. The international office opens the list and your grades decide which doors are open. Somewhere out there, a dorm room and a new version of you are waiting.",
+    "text": "Year 3 means exchange, no exceptions. The international office opens the list: four continents, one university each. Some are a train ride away, some a long-haul flight. Somewhere out there, a dorm room and a new version of you are waiting.",
     "art": "airport",
-    "dynamic": { "type": "exchange", "count": 3, "lockedFromTierAbove": 2 },
-    "variants": [
-      {
-        "conditions": "grades >= 72",
-        "text": "Year 3 means exchange, no exceptions. Your grades put you in the top tier, and the list reads like a travel magazine. Somewhere out there, a dorm room and a new version of you are waiting."
-      },
-      {
-        "conditions": "grades >= 50",
-        "text": "Year 3 means exchange, no exceptions. Your grades put you in the middle tier: good options, and the top tier greyed out just above, close enough to sting. Somewhere out there, a dorm room is waiting."
-      },
-      {
-        "conditions": "grades < 50",
-        "text": "Year 3 means exchange, no exceptions. Your grades leave a short list, and the sètes of Year 2 are looking at you from the photo albums. Still: somewhere out there, a dorm room and a new version of you are waiting."
-      }
-    ],
+    "dynamic": { "type": "exchange" },
     "ai": {
       "tone": "anticipation, wanderlust",
       "hints": [
-        "If flag skipped_pm, joke that PM's 8AM class had a say in this list.",
-        "Never say a destination is bad: every tier is an adventure."
+        "Every continent is an adventure: never say a destination is bad.",
+        "The trip footprint is shown on each card; you may nod to the train-versus-plane contrast without lecturing."
       ]
     },
     "choices": []
@@ -64,7 +50,7 @@
       {
         "id": "c07_trains",
         "label": "Trains and buses around",
-        "hint": "Slow travel, big stories",
+        "hint": "An InterRêve pass, big stories",
         "effects": {
           "stats": { "social": 5, "happiness": 5, "intellect": 3, "skillSoft": 2, "money": -3, "energy": -2 },
           "flags": ["exchange_trains"],
@@ -94,7 +80,7 @@
     "age": 21,
     "mandatory": true,
     "title": "The Research Paper",
-    "text": "The summer after the exchange belongs to the mandatory research paper: forty pages, one supervisor, zero excuses. GenAI is open in another tab, blinking at you like a slot machine. How do you use it?",
+    "text": "The summer after the exchange belongs to the mandatory research paper: forty pages, one supervisor, zero excuses. ChatGBT is open in another tab, blinking at you like a slot machine. How do you use it?",
     "art": "research",
     "ai": {
       "tone": "focused, honest about temptation",
@@ -148,16 +134,11 @@
     "title": "The Six-Month Internship",
     "text": "Year 4, back from the exchange. The six-month internship is where job offers are born: your inbox holds three recruiter emails and one suspicious 'opportunity'. Whatever you pick will probably become your first job, so pick like it matters.",
     "art": "bigtech",
-    "variants": [
-      {
-        "conditions": "chose:m_forum=m_forum_goodies",
-        "text": "Year 4, back from the exchange. The six-month internship is where job offers are born. The forum entreprises left you with nine tote bags and a stress ball shaped like a server. Whatever you pick will probably become your first job, so pick like it matters."
-      }
-    ],
     "ai": {
       "tone": "serious stakes, still funny",
       "hints": [
         "Reference the summer internship and the asso when explaining what's unlocked.",
+        "Most internships end with a return-offer test (a skill check): passing it opens prestigious employers at the first-job step.",
         "Locked options show their reason; say which past choice would have opened them."
       ]
     },
@@ -172,6 +153,20 @@
           "stats": { "skillAi": 8, "tech": 4, "money": 4, "energy": -4 },
           "flags": ["OFFER_bigtech"],
           "text": "Your A/B test ships to forty million people. Your mum asks if you 'fixed the internet'."
+        },
+        "chance": {
+          "p": 0.42,
+          "modifiers": [{ "stat": "skillAi", "per": 0.4 }, { "stat": "intellect", "per": 0.1 }],
+          "success": {
+            "stats": { "skillAi": 3, "fame": 2 },
+            "flags": ["aced_coding"],
+            "badges": ["aced_interview"],
+            "text": "Return-offer coding interview: your Math & AI carried you. You reverse the binary tree, then explain why nobody should ever have to."
+          },
+          "failure": {
+            "stats": { "happiness": -3, "skillAi": 2 },
+            "text": "Return-offer coding interview: Math & AI check failed. An off-by-one error, live, with the interviewer gently nodding. You'll dream of it."
+          }
         }
       },
       {
@@ -184,6 +179,20 @@
           "stats": { "money": 8, "skillBusiness": 6, "energy": -8, "happiness": -3 },
           "flags": ["OFFER_finance"],
           "text": "Your model values a company at 2.3 billion. Your rent is still due on the 5th."
+        },
+        "chance": {
+          "p": 0.38,
+          "modifiers": [{ "stat": "skillAi", "per": 0.25 }, { "stat": "intellect", "per": 0.25 }],
+          "success": {
+            "stats": { "intellect": 3, "money": 2 },
+            "flags": ["aced_quant"],
+            "badges": ["aced_interview"],
+            "text": "Return-offer quant test: Intelligence and Math & AI carried you. You price the dice game in your head and they stop the clock early."
+          },
+          "failure": {
+            "stats": { "happiness": -3, "intellect": 2 },
+            "text": "Return-offer quant test failed: the dice game had three dice, not two. You notice on the train home."
+          }
         }
       },
       {
@@ -194,6 +203,20 @@
           "stats": { "money": 5, "network": 6, "skillBusiness": 6, "energy": -8 },
           "flags": ["OFFER_consulting"],
           "text": "You learn that 'let's take this offline' means 'never'. Also, how to align a text box to the pixel."
+        },
+        "chance": {
+          "p": 0.45,
+          "modifiers": [{ "stat": "skillBusiness", "per": 0.3 }, { "stat": "skillSoft", "per": 0.2 }],
+          "success": {
+            "stats": { "network": 5, "skillBusiness": 3 },
+            "flags": ["aced_case"],
+            "badges": ["aced_interview"],
+            "text": "Return-offer case interview: your Economics and Charisma carried you. 'How many croissants are sold in Paris a day?' You nailed it, and the partner smiled."
+          },
+          "failure": {
+            "stats": { "happiness": -3, "skillBusiness": 2 },
+            "text": "Return-offer case interview: your Economics wobbled on the market sizing. You estimated more croissants than people on Earth."
+          }
         }
       },
       {
@@ -218,6 +241,20 @@
           "stats": { "contribution": 4, "network": 6, "skillSoft": 6, "money": -2 },
           "flags": ["OFFER_diplomacy"],
           "text": "You take the night train to Geneva and spend six months drafting paragraph 14(b). It matters, eventually."
+        },
+        "chance": {
+          "p": 0.45,
+          "modifiers": [{ "stat": "intellect", "per": 0.25 }, { "stat": "skillSoft", "per": 0.25 }],
+          "success": {
+            "stats": { "skillSoft": 3, "network": 4 },
+            "flags": ["aced_policy"],
+            "badges": ["aced_interview"],
+            "text": "Final panel: your Intelligence and Charisma carried you. A grey-haired diplomat writes 'sharp' on a napkin."
+          },
+          "failure": {
+            "stats": { "happiness": -3, "skillSoft": 2 },
+            "text": "Final panel: you blank on the question about the precautionary principle. The panel is very polite about it, which is worse."
+          }
         }
       },
       {
@@ -240,6 +277,20 @@
           "stats": { "money": 5, "skillBusiness": 4, "happiness": -1 },
           "flags": ["OFFER_energy", "OFFER_strategy"],
           "text": "You present to an executive committee. Someone says 'interesting' and you replay it for a week."
+        },
+        "chance": {
+          "p": 0.45,
+          "modifiers": [{ "stat": "skillBusiness", "per": 0.3 }, { "stat": "skillSoft", "per": 0.2 }],
+          "success": {
+            "stats": { "network": 5, "skillBusiness": 3 },
+            "flags": ["aced_case"],
+            "badges": ["aced_interview"],
+            "text": "Final case presentation: your Economics and Charisma carried you. The executive committee asks for your slides. The real ones, not the backup."
+          },
+          "failure": {
+            "stats": { "happiness": -3, "skillBusiness": 2 },
+            "text": "Final case presentation: your Economics wobbled on the market sizing. Someone says 'interesting' again, but differently."
+          }
         }
       }
     ]

@@ -73,7 +73,7 @@
       "stats": { "money": -8, "happiness": -5, "fame": -2 },
       "flags": ["startup_failed"],
       "path": { "pathId": "strategy" },
-      "text": "The big model you were wrapping ships your entire product as a free feature. {startup} becomes a slide in someone else's keynote."
+      "text": "OpenEye, whose model you were wrapping, ships your entire product as a free feature. {startup} becomes a slide in someone else's keynote."
     }
   },
   {

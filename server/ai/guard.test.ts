@@ -56,7 +56,7 @@ describe('guard.check', () => {
     const guard = createGuard({ env })
     const r = await guard.check(req(samples.narrate), NarrateInput)
     expect(r.ok).toBe(true)
-    if (r.ok) expect(r.data.scene.id).toBe('m_pm_8am_2')
+    if (r.ok) expect(r.data.scene.id).toBe('m_pm_8am_1')
   })
 
   it('rejects wrong method, bad JSON, missing header, oversize bodies', async () => {

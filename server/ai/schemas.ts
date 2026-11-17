@@ -103,7 +103,8 @@ export const EventInput = z
 export const SurpriseInput = z
   .object({
     ctx: AIContextSchema,
-    paths: z.array(z.object({ id: shortId, name: text(80) })).min(1).max(16),
+    /** Fixed menu of parody employer names (the model picks one, it never invents a company). */
+    employers: z.array(z.object({ name: text(40), pathId: shortId, pathName: text(80) }).strict()).min(1).max(16),
     templates: z.array(TemplateRefSchema).min(1).max(12),
   })
   .strict()
@@ -187,9 +188,8 @@ export const EventOutput = z.object({
 })
 
 export const SurpriseOutput = z.object({
-  employerName: z.string().min(2).max(40).describe('A fictional company name. Never a real company.'),
+  employerName: z.string().min(2).max(40).describe('One of the provided employer names, copied exactly.'),
   tagline: z.string().min(4).max(90),
-  pathId: z.string().describe('One of the provided path ids, copied exactly.'),
   templateId: z.string().describe('One of the provided template ids, copied exactly.'),
   pitch: z.string().min(20).max(300).describe('At most 2 sentences, the recruiter speaking to "you".'),
 })

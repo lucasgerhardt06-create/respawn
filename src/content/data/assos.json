@@ -176,7 +176,7 @@
     "category": "corpo",
     "school": "ESSEC",
     "visibleIf": "flag:asso_waiting",
-    "blurb": "The M&A association: case studies, valuation nights, suits on Tuesdays and a feed full of handshakes.",
+    "blurb": "The M&A association: case studies, valuation nights, suits on Tuesdays and a LinkedOut feed full of handshakes.",
     "conditions": "skillBusiness >= 25",
     "lockedReason": "Requires Economics ≥ 25",
     "effects": {

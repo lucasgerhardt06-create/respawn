@@ -31,6 +31,38 @@ describe('forbidden-string filter', () => {
     expect(findIssue('A googly-eyed robot greets you.')).toBeNull()
   })
 
+  // The official name list (docs/GAME_DESIGN.md §0): real name → parody used in the game.
+  const NAME_TABLE: [string, string][] = [
+    ['LinkedIn', 'LinkedOut'], ['YouTube', 'YouTub'], ['Instagram', 'InstaGran'], ['TikTok', 'TikTac'],
+    ['Facebook', 'FaceBuk'], ['ChatGPT', 'ChatGBT'], ['OpenAI', 'OpenEye'], ['Bitcoin', 'Bitcorn'], ['Google', 'Goggle'],
+    ['Meta', 'Metta'], ['Apple', 'Appel'], ['Amazon', 'Amazoom'], ['Microsoft', 'Microsift'], ['Nvidia', 'Envidia'],
+    ['Goldman Sachs', 'Goldmann Sax'], ['J.P. Morgan', 'J.B. Morgane'], ['McKinsey', 'McKinsley'], ['BCG', 'BCJ'],
+    ['Bain & Company', 'Bain-Marie'], ['Interrail', 'InterRêve'], ['United Nations', 'United Notions'], ['OECD', 'OECB'],
+    ['iPhone', 'aiPhone'], ['Palantir', 'Palantire'], ['TotalEnergies', 'TotalEnnemies'], ['LVMH', 'LVMeh'],
+    ['BlackRock', 'GreenRock'], ['DeepMind', 'DeepBlind'], ['Institut Pasteur', 'Institut Pasteurisé'],
+    ['Doctors Without Borders', 'Doctors Without Orders'], ['EDF', 'EDEffort'],
+  ]
+
+  it('accepts every parody name from the official list', () => {
+    for (const [, parody] of NAME_TABLE) {
+      expect(findIssue(`You get an offer from ${parody}.`), parody).toBeNull()
+      expect(findIssue(`${parody} is hiring.`), parody).toBeNull()
+    }
+    expect(findIssue('Your Slacker pings at midnight and your aiPhone glows.')).toBeNull()
+  })
+
+  it('rejects every real name from the official list', () => {
+    for (const [real] of NAME_TABLE) {
+      expect(findIssue(`You get an offer from ${real}.`), real).toBe('real_brand')
+      expect(findIssue(`${real} is hiring.`), real).toBe('real_brand')
+    }
+  })
+
+  it('blocks the everyday-word brands only when capitalised', () => {
+    expect(findIssue('You bake an apple pie and read about the amazon basin.')).toBeNull()
+    expect(findIssue('You join Meta.')).toBe('real_brand')
+  })
+
   it('lets brands through when they were already in the input', () => {
     const allow = brandsIn('Base text: the SNCF strike again.')
     expect(findIssue('The SNCF strikes again.', { allowBrands: allow })).toBeNull()

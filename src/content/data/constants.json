@@ -197,28 +197,12 @@
   },
   "aiEventSlots": [
     {
-      "id": "ai_slot_27",
-      "age": 27.5,
-      "phase": "career",
-      "fallbackSceneId": "e_ai_fb_headhunter"
-    },
-    {
-      "id": "ai_slot_34",
-      "age": 34,
-      "phase": "career",
-      "fallbackSceneId": "e_ai_fb_moonshot"
-    },
-    {
       "id": "ai_slot_68",
       "age": 68,
       "phase": "oldage",
       "fallbackSceneId": "e_ai_fb_viral_elder"
     }
   ],
-  "exchange": {
-    "highMin": 72,
-    "midMin": 50
-  },
   "flagMemories": {
     "intl_origin": "came to France from abroad to study at AIDAMS",
     "housing_campus": "lived in the windy campus residence at Saclay in Year 1, next door to Lou",
@@ -265,17 +249,11 @@
     "went_sete": "went to sètes (ESSEC parties)",
     "met_3am": "met Noa in a 3AM conversation outside a sète and kept in touch",
     "pm_went_1": "went to PM's first 8AM class",
-    "pm_went_2": "went to PM's second 8AM class",
     "pm_went_3": "went to PM's last 8AM class",
     "pm_skipped_1": "skipped PM's first 8AM class",
-    "pm_skipped_2": "skipped PM's second 8AM class",
     "pm_skipped_3": "skipped PM's last 8AM class while PM looked straight at the door",
     "skipped_pm": "skipped at least one of PM's 8AM classes (PM remembers)",
     "pm_regular": "never missed one of PM's 8AM classes (PM noticed)",
-    "student_job": "worked a student job to pay rent",
-    "tutor": "tutored high schoolers for money",
-    "hackathon_win": "won a student hackathon with a demo that worked once",
-    "mun_star": "starred at a Model UN debate on AI regulation",
     "injured": "got a lasting sports injury in Year 2",
     "tournament_win": "won an inter-school tournament",
     "BANK": "interned at an investment bank",
@@ -285,8 +263,6 @@
     "bought_phone": "bought a new phone on release day at least once",
     "refurb_phone": "bought a refurbished phone",
     "kept_phone_1": "kept the old phone instead of upgrading at 20",
-    "kept_phone_2": "kept the old phone at 29",
-    "kept_phone_3": "kept the old phone at about forty",
     "INTL": "did the mandatory Year 3 exchange abroad",
     "dest_ntu": "did the exchange at NTU Singapore",
     "dest_cuhk": "did the exchange at CUHK Hong Kong",
@@ -324,30 +300,26 @@
     "aced_coding": "aced a Big Tech coding interview",
     "aced_quant": "aced a quant trading test",
     "aced_policy": "aced a policy panel interview",
-    "scammed": "lost a rent deposit to a fake Paris flat listing",
-    "worked_panoptis": "worked at Panoptis, the defense and surveillance analytics giant",
-    "worked_infiniscroll": "worked at InfiniScroll, building the feed",
-    "worked_nebulary": "worked at Nebulary, the cloud and AI platform",
-    "worked_tramontane": "worked at Tramontane AI, the French frontier-AI lab",
-    "worked_public_lab": "worked at Hexagone AI Lab (public research)",
-    "worked_health_lab": "worked at Cassiopée Health Lab (health economics)",
-    "worked_goldbridge": "worked at Goldbridge, the investment bank",
-    "worked_hedgehog": "worked at Hedgehog Partners, the quant fund",
-    "worked_leafline": "worked at Leafline Capital, the ESG asset manager",
+    "worked_panoptis": "worked at Palantire, the defense and surveillance analytics giant",
+    "worked_infiniscroll": "worked at Metta, building the feed",
+    "worked_nebulary": "worked at Goggle, the cloud and AI platform",
+    "worked_tramontane": "worked at OpenEye, the frontier-AI lab",
+    "worked_public_lab": "worked at DeepBlind, the AI research lab",
+    "worked_health_lab": "worked at Institut Pasteurisé, the health economics lab",
+    "worked_goldbridge": "worked at Goldmann Sax, the investment bank",
+    "worked_hedgehog": "worked at J.B. Morgane, the quant fund",
+    "worked_leafline": "worked at GreenRock, the ESG asset manager",
     "worked_finance": "had a career in finance",
-    "worked_sterling": "worked at Sterling & Pike, the strategy consultancy",
-    "worked_synergeia": "worked at Synergeia Advisory",
+    "worked_sterling": "worked at McKinsley, the strategy consultancy",
+    "worked_synergeia": "worked at Bain-Marie, the audit and consulting firm",
     "worked_consulting": "had a career in consulting",
-    "worked_gcai": "worked at the Geneva Council on AI",
-    "worked_terra": "worked at the Terra Accord climate secretariat",
-    "worked_lumiere": "worked in strategy at Maison Lumière, the luxury group",
-    "worked_hyperbox": "worked at Hyperbox, the e-commerce giant",
-    "worked_petrolia": "worked at Petrolia, the oil and gas major",
-    "worked_voltaire": "worked at Voltaire Grid (renewables and grid)",
-    "worked_verdant": "worked at Verdant, the impact NGO",
-    "worked_common_ground": "worked at Common Ground, the social enterprise",
-    "worked_sprout": "worked at Sprout Labs, a seed-stage startup",
-    "worked_farm": "joined La Ferme des Communs, a farm co-op",
+    "worked_gcai": "worked at the OECB",
+    "worked_terra": "worked at the United Notions climate secretariat",
+    "worked_lumiere": "worked in strategy at LVMeh, the luxury group",
+    "worked_hyperbox": "worked at Amazoom, the e-commerce giant",
+    "worked_petrolia": "worked at TotalEnnemies, the oil and gas major",
+    "worked_voltaire": "worked at EDEffort (renewables and grid)",
+    "worked_verdant": "worked at Doctors Without Orders, the impact NGO",
     "low_tech_life": "chose a low-tech life: garden, bike, few things",
     "grind": "worked 55+ hour weeks for a decade",
     "balanced_rhythm": "kept a real 40-hour week",
@@ -359,21 +331,8 @@
     "kids_tablets": "gave the kids tablets early",
     "partner_no_kids": "has a partner and no kids",
     "solo": "stayed solo and career-first at 30",
-    "married": "got married",
-    "big_wedding": "threw a big wedding",
     "divorced": "went through a separation",
     "reconciled": "saved the relationship through couples therapy",
-    "pet_dog": "adopted a dog",
-    "pet_cat": "adopted a cat",
-    "ski_yearly": "went skiing every winter with colleagues",
-    "desert_festival": "flew to a desert art festival",
-    "reality_tv": "was on a reality-TV show called 'Startup Island'",
-    "crypto_rich": "got lucky on a crypto coin",
-    "crypto_rekt": "lost savings on a crypto coin",
-    "homeowner": "bought a home",
-    "suburban_house": "lives in a suburban house with two cars",
-    "grandparents_home": "moved the grandparents in",
-    "kid_phone_early": "gave the kid a smartphone before ten",
     "project_scale": "scaled a flagship AI project at all costs",
     "project_frugal": "built a frugal, measured AI project",
     "project_climate": "pointed a flagship AI project at climate or health",
@@ -413,11 +372,8 @@
     "stayed_quiet": "found a damning document at work and stayed quiet",
     "fixed_inside": "quietly fixed an ethical problem from inside the company",
     "recovered": "got help for an addiction",
-    "gambling": "fell into an online betting habit",
     "pm_reunion": "met PM again decades later over coffee",
     "pm_panel": "joined PM on a conference panel",
-    "sports_car": "bought a sports car in a midlife crisis",
-    "health_issue": "went through a serious health scare",
     "long_haul_holidays": "took two long-haul holidays a year from 45",
     "low_carbon_comfort": "insulated the home, switched to trains, an EV and less meat",
     "giver": "gave a tenth of income to climate and health charities",
@@ -431,7 +387,6 @@
     "local_retirement": "spent retirement local: volunteering, chess, family calls",
     "world_traveller": "travelled the world in retirement",
     "kept_working": "kept working part-time after 65",
-    "cloud_deleted": "deleted 40,000 cloud photos (it saved almost nothing)",
     "legacy_family": "left everything to family",
     "legacy_climate": "funded climate and health research",
     "legacy_ai_lab": "funded an AI lab",
@@ -445,11 +400,53 @@
     "surprise_golden_cage",
     "surprise_wildcard"
   ],
+  "surpriseEmployers": [
+    {
+      "name": "Envidia",
+      "pathId": "bigtech"
+    },
+    {
+      "name": "Microsift",
+      "pathId": "bigtech"
+    },
+    {
+      "name": "Appel",
+      "pathId": "bigtech"
+    },
+    {
+      "name": "FaceBuk",
+      "pathId": "bigtech"
+    },
+    {
+      "name": "InstaGran",
+      "pathId": "bigtech"
+    },
+    {
+      "name": "TikTac",
+      "pathId": "bigtech"
+    },
+    {
+      "name": "YouTub",
+      "pathId": "bigtech"
+    },
+    {
+      "name": "LinkedOut",
+      "pathId": "bigtech"
+    },
+    {
+      "name": "Slacker",
+      "pathId": "bigtech"
+    },
+    {
+      "name": "BCJ",
+      "pathId": "consulting"
+    }
+  ],
   "badges": [
     {
       "id": "kept_phone",
       "label": "Kept It",
-      "description": "Never bought a new phone on a whim. Eighty percent of a device's footprint is in making it."
+      "description": "Kept your cracked phone instead of upgrading. Eighty percent of a device's footprint is in making it."
     },
     {
       "id": "no_flights",
@@ -469,7 +466,7 @@
     {
       "id": "logged_off",
       "label": "Logged Off",
-      "description": "Deleted the social apps for good."
+      "description": "Deleted InstaGran, TikTac and the rest for good."
     },
     {
       "id": "ten_percent",
@@ -512,11 +509,6 @@
       "description": "Went back to AIDAMS to teach and mentor."
     },
     {
-      "id": "myth_buster",
-      "label": "Myth Buster",
-      "description": "Deleted 40,000 cloud photos and learned it saves almost nothing."
-    },
-    {
       "id": "champion",
       "label": "Champion",
       "description": "Won the inter-school tournament for your asso."
@@ -525,11 +517,6 @@
       "id": "sprout",
       "label": "Sprout",
       "description": "Planted forests that will outgrow you. Life grows back."
-    },
-    {
-      "id": "hackathon_winner",
-      "label": "Hackathon Winner",
-      "description": "Won a hackathon with a demo that worked exactly once."
     },
     {
       "id": "aced_interview",

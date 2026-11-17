@@ -6,7 +6,7 @@ Pixel-art life-choice game for the AIDAMS Cohesion Day (ESSEC × CentraleSupéle
 
 ## Non-negotiables
 - Player-facing text in **English**.
-- **No real company or brand names** (fictional employers only). Real schools/assos are fine.
+- **No real company or brand in scene text**: use the parody names from the official list in `docs/GAME_DESIGN.md` §0 (Goggle, Metta, McKinsley, LinkedOut…) and never invent other company names (the player's own startup, investors and rivals excepted). Real schools, assos and partner universities keep their names; real names only in fact sources.
 - The professor is **only ever "PM"**. Never write his full name, anywhere.
 - Locked choices are **shown greyed with a reason**, never hidden.
 - **AI narrates, the engine decides.** Claude never sets numbers. Every scene has a base text so the game never blocks.

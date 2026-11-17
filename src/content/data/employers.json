@@ -2,8 +2,8 @@
   {
     "id": "panoptis",
     "pathId": "bigtech",
-    "name": "Panoptis",
-    "label": "Panoptis (defense analytics)",
+    "name": "Palantire",
+    "label": "Palantire (defense analytics)",
     "hint": "Top pay, very private clients",
     "tagline": "Your code will help 'keep people safe'. Which people is a later question.",
     "prestige": 9,
@@ -15,7 +15,7 @@
       "stats": { "money": 12, "tech": 6, "ai": 6, "fame": 2, "contribution": -6, "ethics": -12 },
       "flags": ["worked_panoptis"],
       "footprint": [
-        { "label": "Panoptis data centres (work footprint, design estimate)", "category": "career", "workT": 8000 }
+        { "label": "Palantire data centres (work footprint, design estimate)", "category": "career", "workT": 8000 }
       ],
       "text": "Your badge opens doors you didn't know existed. Some of them should probably stay closed."
     }
@@ -23,8 +23,8 @@
   {
     "id": "infiniscroll",
     "pathId": "bigtech",
-    "name": "InfiniScroll",
-    "label": "InfiniScroll (social media)",
+    "name": "Metta",
+    "label": "Metta (social media)",
     "hint": "Build the feed everyone hates to love",
     "tagline": "Connecting people, one more scroll at a time.",
     "prestige": 8,
@@ -36,7 +36,7 @@
       "stats": { "money": 10, "tech": 6, "fame": 3, "contribution": -5, "ethics": -6, "aiLever": 0.005 },
       "flags": ["worked_infiniscroll"],
       "footprint": [
-        { "label": "InfiniScroll recommendation engine (work footprint, design estimate)", "category": "career", "workT": 5000 }
+        { "label": "Metta recommendation engine (work footprint, design estimate)", "category": "career", "workT": 5000 }
       ],
       "factId": "f_surgeon_general",
       "text": "Your first project: make people scroll four seconds longer. You succeed. Somewhere, a teenager misses their bus stop."
@@ -45,8 +45,8 @@
   {
     "id": "nebulary",
     "pathId": "bigtech",
-    "name": "Nebulary",
-    "label": "Nebulary (cloud & AI platform)",
+    "name": "Goggle",
+    "label": "Goggle (cloud & AI platform)",
     "hint": "Servers as far as the eye can see",
     "tagline": "Your data, our cloud, everyone's electricity bill.",
     "prestige": 7,
@@ -58,7 +58,7 @@
       "stats": { "money": 9, "tech": 8, "ai": 6, "skillAi": 4, "energy": -3, "aiLever": 0.005 },
       "flags": ["worked_nebulary"],
       "footprint": [
-        { "label": "Nebulary data centre expansion (work footprint, design estimate)", "category": "career", "workT": 10000 }
+        { "label": "Goggle data centre expansion (work footprint, design estimate)", "category": "career", "workT": 10000 }
       ],
       "factId": "f_datacentres",
       "text": "You get a hoodie, a badge and access to a data centre the size of a small town. It hums like it knows something."
@@ -67,10 +67,10 @@
   {
     "id": "tramontane",
     "pathId": "bigtech",
-    "name": "Tramontane AI",
-    "label": "Tramontane AI (frontier lab)",
-    "hint": "France's frontier-AI rocket",
-    "tagline": "Building Europe's smartest model. Also its largest electricity contract.",
+    "name": "OpenEye",
+    "label": "OpenEye (frontier lab)",
+    "hint": "The frontier-AI rocket",
+    "tagline": "Building the world's smartest model. Also its largest electricity contract.",
     "prestige": 10,
     "visibleIf": "!flag:worked_tramontane",
     "conditions": { "any": ["flag:phd", "skillAi >= 65", { "all": ["flag:aced_coding", "skillAi >= 55", "intellect >= 45"] }] },
@@ -80,18 +80,18 @@
       "stats": { "money": 7, "tech": 10, "ai": 12, "fame": 6, "skillAi": 6, "energy": -6, "aiLever": 0.01 },
       "flags": ["worked_tramontane"],
       "footprint": [
-        { "label": "Tramontane training runs (work footprint, design estimate)", "category": "career", "workT": 12000, "factId": "f_frontier_training" }
+        { "label": "OpenEye training runs (work footprint, design estimate)", "category": "career", "workT": 12000, "factId": "f_frontier_training" }
       ],
-      "text": "Forty researchers, a whiteboard full of scaling laws and a coffee machine that costs more than your car. The press calls you 'the European answer'."
+      "text": "Forty researchers, a whiteboard full of scaling laws and a coffee machine that costs more than your car. The press calls it 'the most important company on Earth'. Your mum calls it 'the chatbot place'."
     }
   },
   {
     "id": "hexagone_lab",
     "pathId": "research_ml",
-    "name": "Hexagone AI Lab",
-    "label": "Hexagone AI Lab (public research)",
-    "hint": "Public money, open science",
-    "tagline": "Open science, open questions, closed coffee machine (broken since forever).",
+    "name": "DeepBlind",
+    "label": "DeepBlind (AI research lab)",
+    "hint": "Papers, compute, curiosity",
+    "tagline": "Solving intelligence, then everything else. The coffee machine is still broken.",
     "prestige": 8,
     "visibleIf": "!flag:worked_public_lab",
     "conditions": "flag:phd",
@@ -105,8 +105,8 @@
   {
     "id": "cassiopee",
     "pathId": "research_econ",
-    "name": "Cassiopée Health Lab",
-    "label": "Cassiopée Health Lab (health economics)",
+    "name": "Institut Pasteurisé",
+    "label": "Institut Pasteurisé (health economics)",
     "hint": "Models that steer hospital budgets",
     "tagline": "We put numbers on health so nobody has to guess.",
     "prestige": 6,
@@ -122,8 +122,8 @@
   {
     "id": "goldbridge",
     "pathId": "finance",
-    "name": "Goldbridge",
-    "label": "Goldbridge (investment bank)",
+    "name": "Goldmann Sax",
+    "label": "Goldmann Sax (investment bank)",
     "hint": "M&A, bonuses, decks at dawn",
     "tagline": "Money never sleeps. Neither will you.",
     "prestige": 9,
@@ -142,8 +142,8 @@
   {
     "id": "hedgehog",
     "pathId": "finance",
-    "name": "Hedgehog Partners",
-    "label": "Hedgehog Partners (quant fund)",
+    "name": "J.B. Morgane",
+    "label": "J.B. Morgane (quant fund)",
     "hint": "Your models versus the market",
     "tagline": "We beat the market. The market has not been informed.",
     "prestige": 8,
@@ -161,8 +161,8 @@
   {
     "id": "leafline",
     "pathId": "finance",
-    "name": "Leafline Capital",
-    "label": "Leafline Capital (ESG funds)",
+    "name": "GreenRock",
+    "label": "GreenRock (ESG funds)",
     "hint": "Green funds, mostly green",
     "tagline": "Sustainable finance, sustainably profitable.",
     "prestige": 6,
@@ -178,8 +178,8 @@
   {
     "id": "sterling_pike",
     "pathId": "consulting",
-    "name": "Sterling & Pike",
-    "label": "Sterling & Pike (strategy consulting)",
+    "name": "McKinsley",
+    "label": "McKinsley (strategy consulting)",
     "hint": "Eighty slides, three countries a week",
     "tagline": "We'll tell you what you already know, in 80 slides.",
     "prestige": 8,
@@ -197,8 +197,8 @@
   {
     "id": "synergeia",
     "pathId": "consulting",
-    "name": "Synergeia Advisory",
-    "label": "Synergeia Advisory (audit & consulting)",
+    "name": "Bain-Marie",
+    "label": "Bain-Marie (audit & consulting)",
     "hint": "Process, excellence, process",
     "tagline": "Synergies identified. Headcount optimised. Invoice attached.",
     "prestige": 5,
@@ -212,9 +212,9 @@
   {
     "id": "gcai",
     "pathId": "diplomacy",
-    "name": "Geneva Council on AI",
-    "label": "Geneva Council on AI (intl agency)",
-    "hint": "Treaties, translators, trains to Geneva",
+    "name": "OECB",
+    "label": "OECB (intl organisation)",
+    "hint": "Reports, committees, Paris",
     "tagline": "Making sure the robots sign the treaty too.",
     "prestige": 8,
     "visibleIf": "!flag:worked_gcai",
@@ -223,14 +223,14 @@
     "effects": {
       "stats": { "money": 5, "contribution": 6, "fame": 4, "network": 6, "skillSoft": 4, "energy": -4 },
       "flags": ["worked_gcai", "flew"],
-      "text": "Your first job is a footnote in an annex of a draft. It is the most argued-over footnote in Geneva."
+      "text": "Your first job is a footnote in an annex of a draft. It is the most argued-over footnote in Paris."
     }
   },
   {
     "id": "terra_accord",
     "pathId": "diplomacy",
-    "name": "Terra Accord Secretariat",
-    "label": "Terra Accord (climate agency)",
+    "name": "United Notions",
+    "label": "United Notions (climate agency)",
     "hint": "Climate summits, endless drafts",
     "tagline": "Saving the planet, one bracketed paragraph at a time.",
     "prestige": 7,
@@ -247,8 +247,8 @@
   {
     "id": "maison_lumiere",
     "pathId": "strategy",
-    "name": "Maison Lumière",
-    "label": "Maison Lumière (luxury group)",
+    "name": "LVMeh",
+    "label": "LVMeh (luxury group)",
     "hint": "Strategy for handbags and heritage",
     "tagline": "Selling timelessness, refreshed every season.",
     "prestige": 7,
@@ -264,8 +264,8 @@
   {
     "id": "hyperbox",
     "pathId": "strategy",
-    "name": "Hyperbox",
-    "label": "Hyperbox (e-commerce giant)",
+    "name": "Amazoom",
+    "label": "Amazoom (e-commerce giant)",
     "hint": "Logistics, algorithms, next-day everything",
     "tagline": "Next-day delivery. Next-day regret.",
     "prestige": 6,
@@ -279,8 +279,8 @@
   {
     "id": "petrolia",
     "pathId": "energy",
-    "name": "Petrolia",
-    "label": "Petrolia (oil & gas major)",
+    "name": "TotalEnnemies",
+    "label": "TotalEnnemies (oil & gas major)",
     "hint": "Huge salary, heavy conscience",
     "tagline": "Powering progress since before you were born. And after.",
     "prestige": 8,
@@ -290,7 +290,7 @@
       "stats": { "money": 13, "skillBusiness": 4, "ethics": -12, "contribution": -5 },
       "flags": ["worked_petrolia", "flew"],
       "footprint": [
-        { "label": "Your share of Petrolia's operations (work footprint, design estimate)", "category": "career", "workT": 40000 }
+        { "label": "Your share of TotalEnnemies's operations (work footprint, design estimate)", "category": "career", "workT": 40000 }
       ],
       "factId": "f_current_policies",
       "text": "Your welcome pack includes a fleece, a fountain pen and a glossy report on 'the energy transition'. The pen is the most sincere part."
@@ -299,8 +299,8 @@
   {
     "id": "voltaire_grid",
     "pathId": "energy",
-    "name": "Voltaire Grid",
-    "label": "Voltaire Grid (renewables & grid)",
+    "name": "EDEffort",
+    "label": "EDEffort (renewables & grid)",
     "hint": "Wind farms, permits, patience",
     "tagline": "Plugging France into the future, one permit at a time.",
     "prestige": 6,
@@ -316,8 +316,8 @@
   {
     "id": "verdant",
     "pathId": "ngo",
-    "name": "Verdant",
-    "label": "Verdant (impact NGO)",
+    "name": "Doctors Without Orders",
+    "label": "Doctors Without Orders (impact NGO)",
     "hint": "Save the world on a shoestring",
     "tagline": "Saving the world on a shoestring budget.",
     "prestige": 6,
@@ -328,60 +328,6 @@
       "stats": { "money": -6, "contribution": 12, "ethics": 8, "happiness": 3 },
       "flags": ["worked_verdant"],
       "text": "Your desk is a door on two trestles. Your work keeps a river clean. You would not trade."
-    }
-  },
-  {
-    "id": "common_ground",
-    "pathId": "ngo",
-    "name": "Common Ground",
-    "label": "Common Ground (social enterprise)",
-    "hint": "Profit with a purpose, mostly purpose",
-    "tagline": "Profit with a purpose. Mostly purpose.",
-    "prestige": 5,
-    "visibleIf": "!flag:worked_common_ground",
-    "conditions": { "any": ["flag:OFFER_ngo", "flag:IMPACT", "flag:gap_year", "contribution >= 56"] },
-    "lockedReason": "Requires an NGO internship, a gap year or Impact ≥ 56",
-    "effects": {
-      "stats": { "money": -3, "contribution": 8, "skillBusiness": 3, "happiness": 2 },
-      "flags": ["worked_common_ground"],
-      "text": "You help long-term unemployed people repair laptops and sell them refurbished. Everyone wins, slowly."
-    }
-  },
-  {
-    "id": "sprout_labs",
-    "pathId": "startup",
-    "name": "Sprout Labs",
-    "label": "Sprout Labs (seed-stage startup)",
-    "hint": "Six people, one dog, short runway",
-    "tagline": "Six people, one dog, infinite runway (approx. nine months).",
-    "prestige": 5,
-    "visibleIf": "!flag:worked_sprout",
-    "conditions": { "any": ["flag:STARTUP", "flag:OFFER_bigtech"] },
-    "lockedReason": "Requires a startup internship, a startup asso or a Big Tech internship",
-    "effects": {
-      "stats": { "money": -2, "skillAi": 6, "skillBusiness": 5, "fame": 3, "energy": -8, "network": 4 },
-      "flags": ["worked_sprout", "flew"],
-      "text": "You are employee number seven. Your title is 'founding engineer, growth, also the printer'."
-    }
-  },
-  {
-    "id": "la_ferme",
-    "pathId": "isolation",
-    "name": "La Ferme des Communs",
-    "label": "La Ferme des Communs (farm co-op)",
-    "hint": "No Wi-Fi, excellent tomatoes",
-    "tagline": "No Wi-Fi. Excellent tomatoes.",
-    "prestige": 3,
-    "visibleIf": "!flag:worked_farm",
-    "conditions": "flag:gap_year",
-    "lockedReason": "Requires a gap year off-grid",
-    "effects": {
-      "set": { "screenHours": 1 },
-      "stats": { "money": -8, "happiness": 6, "fame": -6, "energy": 4 },
-      "flags": ["worked_farm", "low_tech_life"],
-      "footprint": [{ "label": "Logged off from your audience", "category": "digital", "influenceTPerYear": 0 }],
-      "factId": "f_carbone4",
-      "text": "Your classmates send salary screenshots. You send a photo of a tomato. Yours gets more likes."
     }
   }
 ]

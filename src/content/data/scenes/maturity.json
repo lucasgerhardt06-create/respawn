@@ -7,12 +7,12 @@
     "age": 45,
     "mandatory": true,
     "title": "What Do You Do With Your Money?",
-    "text": "Forty-five. For the first time there's money left at the end of the month, and a banker who calls you by your first name. Your friends post from Bali and Patagonia; your home still leaks heat like a sieve. What do you do with it?",
+    "text": "Forty-five. For the first time there's money left at the end of the month, and a banker who calls you by your first name. Your friends post on InstaGran from Bali and Patagonia; your home still leaks heat like a sieve. What do you do with it?",
     "art": "home",
     "variants": [
       {
         "conditions": "money < 40",
-        "text": "Forty-five. There isn't much left at the end of the month, but there is a little, and a banker who keeps sending brochures. Your friends post from Bali and Patagonia; your home still leaks heat like a sieve. What do you do with what you have?"
+        "text": "Forty-five. There isn't much left at the end of the month, but there is a little, and a banker who keeps sending brochures. Your friends post on InstaGran from Bali and Patagonia; your home still leaks heat like a sieve. What do you do with what you have?"
       }
     ],
     "ai": {
@@ -83,7 +83,7 @@
         "effects": {
           "stats": { "money": 6, "tech": 2, "ai": 2, "contribution": -1, "aiLever": 0.002 },
           "flags": ["ai_investor"],
-          "text": "Your portfolio is seventy percent chips and thirty percent hope. It goes up. Mostly."
+          "text": "Your portfolio is seventy percent Envidia chips, twenty percent Microsift and ten percent Bitcorn, for fun. It goes up. Mostly."
         }
       },
       {

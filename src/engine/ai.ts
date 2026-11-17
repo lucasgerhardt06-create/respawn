@@ -77,6 +77,40 @@ export function injectAiEvent(
 }
 
 /** Validates the offer for the pending job-offers scene. Returns the sanitised draft or null. */
+/** A parody employer the AI may pick for the surprise offer (constants.surpriseEmployers). */
+export interface SurpriseMenuItem {
+  name: string
+  pathId: string
+  pathName: string
+}
+
+/** The AI can't open a career the player isn't qualified for: one employer of that path must be reachable. */
+function pathOpen(content: Content, state: GameState, pathId: string): boolean {
+  const path = indexContent(content).paths.get(pathId)
+  if (!path || state.bannedFields.includes(path.field)) return false
+  const env = makeEnv(content, state)
+  const employers = content.employers.filter((e) => e.pathId === path.id)
+  return employers.length === 0 || employers.some((e) => evaluate(e.conditions, env))
+}
+
+/**
+ * The fixed menu of names for the C11 surprise offer: parody employers whose path is open to the
+ * player and that are not already on screen (or the player's current employer).
+ */
+export function surpriseMenu(content: Content, state: GameState): SurpriseMenuItem[] {
+  const ix = indexContent(content)
+  const taken = new Set<string>()
+  for (const c of state.pending?.dynamicChoices ?? []) {
+    taken.add(c.label.toLowerCase())
+    const e = ix.employers.get(c.id)
+    if (e) taken.add(e.name.toLowerCase())
+  }
+  if (state.path?.employerName) taken.add(state.path.employerName.toLowerCase())
+  return content.constants.surpriseEmployers
+    .filter((e) => !taken.has(e.name.toLowerCase()) && pathOpen(content, state, e.pathId))
+    .map((e) => ({ name: e.name, pathId: e.pathId, pathName: ix.paths.get(e.pathId)!.name }))
+}
+
 export function validateSurpriseOffer(
   content: Content,
   state: GameState,
@@ -89,19 +123,15 @@ export function validateSurpriseOffer(
   const scene = getScene(content, p.sceneId)
   if (scene.dynamic?.type !== 'jobOffers' || !scene.dynamic.aiSurprise) return null
   if (p.surpriseOffer || p.dynamicChoices?.some((c) => c.id === SURPRISE_CHOICE_ID)) return null
-  const employerName = cleanString(offer.employerName, 60)
+  const name = cleanString(offer.employerName, 60)?.toLowerCase()
   const tagline = cleanString(offer.tagline, 160) ?? ''
   const pitch = cleanString(offer.pitch, 600) ?? ''
-  if (!employerName) return null
-  const path = typeof offer.pathId === 'string' ? ix.paths.get(offer.pathId) : undefined
-  if (!path || state.bannedFields.includes(path.field)) return null
-  // The AI can't open a career the player isn't qualified for: at least one employer of that path must be reachable.
-  const env = makeEnv(content, state)
-  const employers = content.employers.filter((e) => e.pathId === path.id)
-  if (employers.length > 0 && !employers.some((e) => evaluate(e.conditions, env))) return null
+  // The name must come from the fixed parody menu (never invented); the menu also fixes the path.
+  const item = name ? surpriseMenu(content, state).find((m) => m.name.toLowerCase() === name) : undefined
+  if (!item) return null
   if (!content.constants.surpriseOfferTemplateIds.includes(offer.templateId) || !ix.templates.has(offer.templateId))
     return null
-  return { employerName, tagline, pathId: path.id, templateId: offer.templateId, pitch }
+  return { employerName: item.name, tagline, pathId: item.pathId, templateId: offer.templateId, pitch }
 }
 
 export function injectSurpriseOffer(

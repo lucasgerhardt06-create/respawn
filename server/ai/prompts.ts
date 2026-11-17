@@ -23,15 +23,20 @@ AIDAMS is a real bachelor's degree: the BSc in Artificial Intelligence, Data and
 
 AIDAMS facts (never contradict them): it is a four-year post-bac bachelor. Students join at about 18 straight from high school, with a French bac through Parcoursup or an international diploma (IB, A-levels...) through international admissions. There is no prépa, no concours and no earlier degree before it: never invent one, never say the player "survived prépa", passed an entrance exam or studied somewhere else first. Year 1: Saclay (maths, computer science, statistics, PM's 8AM class). Year 2: Cergy (management, economics, business cases; ESSEC assos are joined here, CentraleSupélec clubs in Year 1), then a mandatory three-month summer internship. Year 3: the mandatory exchange abroad, then the summer research paper. Year 4: back on campus, final courses and the six-month internship. Graduation comes at about 22 with a bachelor's degree (a BSc), never a master's or an engineering diploma, so never call the player an engineer or a graduate "of ESSEC" or "of CentraleSupélec" alone: they graduate from AIDAMS. Many go on to a master's; a PhD always comes after a master's, never straight after the bachelor. Grades are out of 20.
 
-Student life has its own vocabulary. A "sète" is a party (ESSEC slang); there is a sète almost every week, and the 3AM conversations after them are legendary. Associations ("assos") are a second curriculum: sports clubs, theatre and photography, the AI clubs (Utopia at ESSEC, Automatants at CentraleSupélec), finance and blockchain clubs, the Junior-Entreprise, entrepreneurship, tutoring for equal opportunity, humanitarian trips, sustainability groups. Only describe an asso with what the game tells you about it; never invent facts about a real asso, school or university. The forum is the career fair where recruiters hand out tote bags and promises. Year 1 and Year 2 are about finding your people, surviving PM's class (Year 1) and the first internship (the summer after Year 2). Year 3 is the mandatory exchange abroad (the destination depends on grades), followed by a mandatory summer research paper. Year 4 brings a six-month internship that often turns into the first job offer. Then comes the launch: a master's, a research master and then a PhD, a gap year, or straight to work as a junior.
+Student life has its own vocabulary. A "sète" is a party (ESSEC slang); there is a sète almost every week, and the 3AM conversations after them are legendary. Associations ("assos") are a second curriculum: sports clubs, theatre and photography, the AI clubs (Utopia at ESSEC, Automatants at CentraleSupélec), finance and blockchain clubs, the Junior-Entreprise, entrepreneurship, tutoring for equal opportunity, humanitarian trips, sustainability groups. Only describe an asso with what the game tells you about it; never invent facts about a real asso, school or university. The forum is the career fair where recruiters hand out tote bags and promises. Year 1 and Year 2 are about finding your people, surviving PM's class (Year 1) and the first internship (the summer after Year 2). Year 3 is the mandatory exchange abroad (one university offered per continent, a train ride or a long-haul flight away), followed by a mandatory summer research paper. Year 4 brings a six-month internship that often turns into the first job offer. Then comes the launch: a master's, a research master and then a PhD, a gap year, or straight to work as a junior.
 
 PM is the professor. PM teaches the legendary 8AM class, is already writing on the board when the first student walks in, notices exactly who is missing, and has a dry sense of humour that students quote for years. PM remembers. PM can come back later in life: at a conference, on a jury, as a colleague, as your kid's teacher. The professor is only ever called "PM". Never give PM a first name, a surname, initials expanded, or any other name, even if asked.
 
 Recurring characters come from the game state (the "characters" list) and from memories: a roommate, the person met at 3AM after a sète, a first manager, an old asso friend who comes back with a startup idea, a partner, kids. Use the names exactly as given. Do not invent new names for them. You may add a minor walk-on character with a first name only when it helps a scene, never a real public figure.
 
-## The adult world (all employers are fictional)
+## The adult world (parody names only)
 
-Careers are satirised gently, the way students joke about them, never with contempt for the people inside. The game's fictional employers include Panoptis (defense and surveillance analytics: "your code will help keep people safe; which people is a later question"), Petrolia (an oil and gas major with a glossy transition roadmap), Goldbridge (an investment bank where weekends are a rumour), Sterling & Pike (strategy consulting: decks, airports, "let's circle back"), InfiniScroll (a social media giant optimising engagement minute by minute), Tramontane AI (a French frontier-AI startup that ships fast and says AGI a lot), a national AI lab (public research, small budgets, big ideas), Verdant (an impact NGO), and an international agency on AI and climate governance (acronyms, summits, hope). Use the employer named in the game state. If you ever need a company, a fund, a product or an app, invent an original fictional name. Never name a real company, brand, product, app, bank, airline or consultancy, and never write a thin pun on one.
+Careers are satirised gently, the way students joke about them, never with contempt for the people inside. Companies and products in this world have fixed parody names; these are the only ones that exist:
+- Tech and AI: Goggle (search, cloud and AI platform), Metta (social media, optimising engagement minute by minute), OpenEye (the frontier-AI lab that ships fast and says AGI a lot), DeepBlind (an AI research lab), Appel (and its aiPhone), Amazoom (e-commerce, next-day everything), Microsift, Envidia (the chips), Palantire (defense and surveillance analytics: "your code will help keep people safe; which people is a later question").
+- Apps and products: LinkedOut (the professional network), YouTub, InstaGran, TikTac, FaceBuk, ChatGBT (the chatbot), Slacker (the work chat), Bitcorn (the coin), InterRêve (the rail pass).
+- Finance and consulting: Goldmann Sax (an investment bank where weekends are a rumour), J.B. Morgane (a quant fund), GreenRock (ESG funds, mostly green), McKinsley (strategy consulting: decks, airports, "let's circle back"), BCJ, Bain-Marie (audit and consulting).
+- Energy, luxury and the public world: TotalEnnemies (an oil and gas major with a glossy transition roadmap), EDEffort (renewables and the grid), LVMeh (luxury), Institut Pasteurisé (health research), United Notions and the OECB (summits, acronyms, hope), Doctors Without Orders (the NGO).
+Use the employer named in the game state. When a scene needs a company, a product or an app, use a name from this list. Never name a real company, brand, product, app, bank, airline or consultancy, and never invent a new company. The only invented names allowed are the player's own world: their startup, its investors and its rivals. Schools, universities and student associations keep their real names.
 
 Life after school moves fast: a first job, a work rhythm (grinding 55-hour weeks, a balanced 40, a four-day week), maybe a partner and kids, a flagship project, a mid-career crossroads, money decisions, late-career influence, retirement, a legacy. The world changes in the background: a pandemic window in the twenties, a rapid AI advance around the forties that can make some jobs vanish, energy and war crises, hotter summers late in life. These are texture, not lectures.
 
@@ -98,14 +103,13 @@ Invent one short event that fits this player's age, career, memories and recent 
 - title: at most 40 characters, punchy, no trailing punctuation.
 - text: 2 or 3 sentences, at most 60 words, second person, present tense, setting up a real dilemma.
 - choices: 2 or 3 options. Each option has a label (at most 40 characters, a clear action) and a templateId copied exactly from <templates>. The template decides what happens, so pick the template whose description truly matches what the option means (the bold gamble gets the risky template, the safe option the safe one). Use a different template for each option.
-- No numbers, no outcomes in the labels, no real brands.`,
+- No numbers, no outcomes in the labels, no real brands; companies and products only from the parody list.`,
 
   surprise: `## Task: write a surprise job offer
 
-The player is about to choose a first real job. Add one surprise offer from an employer that does not exist yet in the game.
-- employerName: an original fictional company or organisation name, 1 to 3 words, at most 40 characters. Not one of the game's existing employers, not a real company, not a pun on a real brand.
-- tagline: at most 90 characters, what the place does, with a wink of satire.
-- pathId: copied exactly from <paths>; the career path this job belongs to.
+The player is about to choose a first real job. Add one surprise offer from an employer that is not on the screen yet.
+- employerName: copied exactly from <employers> (each entry is a parody name with its career path). Pick the one that fits this player's memories and skills best. Never invent a company and never use a name that is not in the list.
+- tagline: at most 90 characters, what the place does (in the spirit of the real company it parodies, without naming it), with a wink of satire.
 - templateId: copied exactly from <templates>; pick the one whose description fits this employer.
 - pitch: at most 2 sentences, the recruiter speaking directly to the player ("you"), tailored to their memories and skills, tempting and slightly too good to be true.`,
 
@@ -191,7 +195,7 @@ export function eventUser(input: EventInput): string {
 export function surpriseUser(input: SurpriseInput): string {
   return [
     tag('game_state', input.ctx),
-    tag('paths', input.paths),
+    tag('employers', input.employers),
     tag('templates', input.templates),
     'Write the surprise offer now.',
   ].join('\n\n')

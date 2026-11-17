@@ -8,15 +8,15 @@ For teammates who want to write or tweak the story **without touching code**. Ev
 
 | File | What |
 |---|---|
-| `constants.json` | Start stats, bounds, footprint and planet numbers, yearly rules, promotion effects, the 4 AI event slots, exchange grade thresholds, **flag memories** (what the narrator remembers), badges |
+| `constants.json` | Start stats, bounds, footprint and planet numbers, yearly rules, promotion effects, the 4 AI event slots, **flag memories** (what the narrator remembers), badges |
 | `profiles.json` | Random origin, family budget, trait (with their stat bumps) and default first names |
 | `scenes/arrival.json` … `scenes/oldage.json` | The 20 **majors** (`c01_…` to `c20_…`) by life phase, plus their follow-up scenes |
-| `scenes/minis.json` | One-tap **minis** (`m_…`): PM's 8AM ×3, sètes + 3AM, phones ×3, exams, interviews, flat hunting… |
-| `scenes/events.json` | **Events** (`e_…`): global (pandemic, AI shock, war, crash), life (wedding, pets, midlife crisis…), consequence (burnout, scandal, addiction…), the 4 AI-slot fallbacks |
+| `scenes/minis.json` | One-tap **minis** (`m_…`): PM's 8AM ×2, one sète + 3AM, the new phone, the ESSEC asso fair, Grounded. Keep them few (pacing budget below) |
+| `scenes/events.json` | **Events** (`e_…`): global (pandemic, AI shock, war, heatwaves), consequence (burnout, scandal, addiction, loneliness, divorce, startup exit, teen anxiety, whistleblower, PM again, sport), the AI-slot fallback |
 | `assos.json` | The asso pool for C03 (4 categories, ESSEC + CentraleSupélec) |
-| `destinations.json` | The 13 exchange universities with grade tier and trip tonnes |
+| `destinations.json` | The 13 exchange universities with continent and trip tonnes (C06 offers one per continent) |
 | `paths.json` | Careers: yearly effects, business flights, AI exposure, `field` (for the AI job-loss ban) |
-| `employers.json` | Fictional employers offered at C11 (and when changing job) |
+| `employers.json` | Employers offered at C11 (and when changing job), under the parody names of `docs/GAME_DESIGN.md` §0 |
 | `startup_sectors.json` | The 6 sectors offered when you found a startup |
 | `ai_templates.json` | Outcome menus the AI picks from for generated events and the surprise job offer |
 | `facts.json` | "Did you know?" facts. **Each needs a real source.** |
@@ -30,14 +30,18 @@ Scenes are ordered by `age` (decimals are fine: `18.6`). At the same age the eng
 | Age | What happens |
 |---|---|
 | 18 | C01 housing · C02 phone habits · C03 asso fair |
-| 18.2–19.85 | PM's 8AM ×3, RER B, sètes (+3AM follow-ups), maths exam, student job (tight budget), family dinner, C04 (19), group project, hackathon, grades reveal |
-| 20–21.5 | C05 summer internship · new phone #1 · C06 exchange (20.4) · C07 travel · exchange stories · C08 research paper (21) · Model UN · forum · C09 6-month internship |
-| 22–23.5 | C10 after AIDAMS (Master's +1 yr, PhD +3 yrs, gap year +1 yr) · interview week (mandatory) · C11 first job · flat hunting · first payslip |
-| 25–40 | C12 work rhythm · group chat · AI slot 27 · ski · salary review · phone #2 · C13 family (30) · pet · C14 flagship project (33) · AI slot 34 · buy or rent · C15 online presence (36) · AI shock (38–40) · C16 mid-career (40) |
-| 41–60 | phone #3 · midlife crisis · C17 money (45) · AI slot 51 · C18 late career (55, skipped if you stayed 20 years) |
-| 65–death | C19 retirement · AI slot 68 · heatwaves · cloud clean-up (74) · C20 legacy (75) |
+| 18.2–19.4 | PM's 8AM (18.2, and 18.75 at p 0.6) · ESSEC asso fair (19, if you waited) · C04 (19) · sète + 3AM (19.4, not library monks) |
+| 20–21.5 | C05 summer internship · new phone (20.2, p 0.4) · C06 exchange (20.4) · C07 travel · C08 research paper (21) · C09 6-month internship + return-offer skill check |
+| 22–24 | C10 after AIDAMS (Master's +1 yr, PhD +3 yrs, gap year +1 yr) · C11 first job · pandemic window (24–30) |
+| 25–40 | C12 work rhythm · C13 family (30) · C14 flagship project (33) · C15 online presence (36) · AI shock (38–40) · C16 mid-career (40) |
+| 41–60 | C17 money (45) · war (48–55) · whistleblower (44–58) · C18 late career (55, skipped if you stayed 20 years) |
+| 65–death | C19 retirement · AI slot 68 · heatwaves · Grounded (74.5, never flew) · C20 legacy (75) |
 
-Choices with `years` make time jump: majors and minis whose age is passed are **skipped** unless they have `"mandatory": true` (all 20 majors and the interview week are mandatory).
+Consequence events (burnout, scandal, addiction, loneliness, divorce…) fire whenever their conditions hold.
+
+**Pacing budget.** Playtests showed that many small choices drown the main story. A life must average **≤ 28 decisions** (p90 ≤ 31): 20 majors plus ~3 minis and ~4–5 events. `tools/pacing.test.ts` fails above 28, and `npm run simulate` prints the split per strategy. Before adding a mini or an event, prefer making it depend on an earlier choice, and check the budget.
+
+Choices with `years` make time jump: majors and minis whose age is passed are **skipped** unless they have `"mandatory": true` (all 20 majors and the ESSEC asso fair are mandatory).
 
 ## 3. Stats and the character sheet
 
@@ -56,9 +60,9 @@ Use these **display names** in every `lockedReason` ("Requires Math & AI ≥ 60"
 | skillSoft | Charisma | 0–100 | Theatre, sport, sètes, negotiations, relationships |
 | energy | Health | 0–100 | < 20 (or < 30 while grinding) triggers burnout |
 | network | Network | 0–100 | Hidden offers, skill checks on contacts |
-| grades | Grades | 0–100 | Student years; exchange tier (≥ 72 high, ≥ 50 mid) |
+| grades | Grades | 0–100 | Student years; research-lab internship, PhD |
 | ethics | Integrity | −50..50 | < −30 triggers the scandal |
-| addiction | Vices | 0–100 | > 60 triggers the addiction event; costs lifespan |
+| addiction | Vices | 0–100 | > 57 triggers the addiction event; costs lifespan |
 | tech, ai | Tech / AI progress | 0–100 | Planet graph only |
 | aiLever | AI lever | −0.10..0.05 | How your work bends world emissions |
 | screenHours | Screen time | h/day | 2.33 = average |
@@ -172,7 +176,9 @@ A choice plus `category` (`sport`, `arts`, `corpo`, `impact`), `school` (`ESSEC`
 
 ### An employer (`employers.json`)
 
-A choice plus `pathId`, `name` (**fictional, never a real company**), `tagline` (satirical, one line), `prestige` (1–10: higher is offered more often and shown greyed as an aspiration when locked) and optional `perDecade` effects on top of the path. Add `worked_<id>` to its flags (endings use them) and `flew` if the path has business flights. Gate prestigious employers with `conditions` on internship flags (`OFFER_*`), interview flags (`aced_case`, `aced_coding`, `aced_quant`, `aced_policy`) or skills, with a display-name `lockedReason`.
+A choice plus `pathId`, `name` (**a parody name from the official list in `docs/GAME_DESIGN.md` §0, never a real company and never a new invented one**), `tagline` (satirical, one line), `prestige` (1–10: higher is offered more often and shown greyed as an aspiration when locked) and optional `perDecade` effects on top of the path. Add `worked_<id>` to its flags (endings use them) and `flew` if the path has business flights. Keep the `id` stable when renaming (saves, sprites, conditions and tests use it); `npm run check-data` warns if one of the old invented names (list in `tools/check-data.ts`) comes back.
+
+**Names in text.** Companies, apps and products in any player-facing text use the official parody list too (a social app → InstaGran or TikTac, the chatbot → ChatGBT, the work chat → Slacker, the phone → the aiPhone, a rail pass → InterRêve). The surprise offer at C11 picks its name from `constants.surpriseEmployers` (parody names that are not regular employers). Gate prestigious employers with `conditions` on internship flags (`OFFER_*`), interview flags (`aced_case`, `aced_coding`, `aced_quant`, `aced_policy`) or skills, with a display-name `lockedReason`.
 
 ### A path (`paths.json`)
 
@@ -193,7 +199,6 @@ One sentence, real numbers, and a `source` (organisation + year). Attach it with
 | Compare a stat, `age`, `promotions`, `yearsInPath` | `"skillAi >= 60"`, `"age > 30"` |
 | End metrics (projected during play) | `"temperature >= 2.5"`, `"F < 5"` |
 | Path / employer (`none` when unemployed) | `"path == finance"`, `"employer != panoptis"`, `"path != none"` |
-| Exchange tier | `"exchangeTier == high"` |
 | Profile | `"profile.budget == tight"`, `"profile.origin == intl"`, `"profile.trait == math"` |
 | Flags | `"flag:TECH"`, `"!flag:SHALLOW"` |
 | A recorded choice | `"chose:c03_asso=asso_utopia"` |

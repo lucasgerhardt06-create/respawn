@@ -8,6 +8,7 @@
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
 import { join, relative } from 'node:path'
 import type { Choice, Cond, Content, Effects, Scene } from '../src/content/schema.ts'
+import { EXCHANGE_CONTINENTS } from '../src/content/schema.ts'
 import { ConditionError, evaluate, parseCondition, walkCondition } from '../src/engine/conditions.ts'
 import { makeEnv } from '../src/engine/planet.ts'
 import { endFigures, summarize } from '../src/engine/summary.ts'
@@ -22,23 +23,35 @@ const SIM_LIVES = Number(process.argv.find((a) => a.startsWith('--lives='))?.spl
 const issues: Issue[] = []
 const add = (level: Level, where: string, message: string) => issues.push({ level, where, message })
 
-// Real brands (fictional employers only). Matched as whole words; the ones that are also
-// ordinary English words are matched case-sensitively.
+// Real brands: content uses the parody names from docs/GAME_DESIGN.md §0 instead (Goggle, Metta, McKinsley...).
+// Matched as whole words, so the parodies pass ("Goldmann Sax", "Envidia", "aiPhone"); the ones that are
+// also ordinary English words are matched case-sensitively.
 const BRANDS_CI = [
-  'Palantir', 'TotalEnergies', 'Google', 'Facebook', 'Instagram', 'TikTok', 'OpenAI', 'Mistral', 'McKinsey',
-  'BCG', 'Goldman', 'JPMorgan', 'Microsoft', 'Tesla', 'Netflix', 'LinkedIn',
+  'Palantir', 'TotalEnergies', 'Google', 'Facebook', 'Instagram', 'TikTok', 'YouTube', 'OpenAI', 'ChatGPT', 'Mistral',
+  'McKinsey', 'BCG', 'Bain & Company', 'Goldman', 'Goldman Sachs', 'JPMorgan', 'J.P. Morgan', 'JP Morgan', 'Microsoft',
+  'Nvidia', 'iPhone', 'Tesla', 'Netflix', 'LinkedIn', 'Bitcoin', 'Interrail', 'OECD', 'United Nations', 'LVMH',
+  'BlackRock', 'DeepMind', 'Institut Pasteur', 'Doctors Without Borders', 'Médecins Sans Frontières', 'Engie',
 ]
-const BRANDS_CS = ['Total', 'Meta', 'Apple', 'Amazon', 'Bain']
+const BRANDS_CS = ['Total', 'Meta', 'Apple', 'Amazon', 'Slack', 'EDF']
+/** The invented employer names used before the parody list (warn if any comes back). */
+const OLD_NAMES = [
+  'Panoptis', 'InfiniScroll', 'Nebulary', 'Tramontane', 'Goldbridge', 'Hedgehog Partners', 'Leafline', 'Sterling & Pike',
+  'Synergeia', 'Hyperbox', 'Petrolia', 'Verdant', 'Voltaire Grid', 'Maison Lumière', 'Terra Accord', 'Geneva Council on AI',
+  'Hexagone AI Lab', 'Cassiopée', 'Common Ground', 'Sprout Labs', 'La Ferme des Communs',
+]
+const escapeRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+/** Whole word, accent- and punctuation-safe (\b fails after "&" or "è"). */
+const wordRe = (term: string, flags: string) => new RegExp(`(?<![\\p{L}\\p{N}])${escapeRe(term)}(?![\\p{L}\\p{N}])`, flags + 'u')
 // The professor is only ever "PM": block his first and last names (stored reversed so they never
 // appear in plain text in the codebase).
 const PROF_TOKENS = ['eppilihp', 'ueihtam'].map((s) => [...s].reverse().join(''))
 
 function brandHits(text: string): string[] {
   const hits: string[] = []
-  for (const b of BRANDS_CI) if (new RegExp(`\\b${b}\\b`, 'i').test(text)) hits.push(b)
+  for (const b of BRANDS_CI) if (wordRe(b, 'i').test(text)) hits.push(b)
   // Case-sensitive ones are ordinary words at the start of a sentence ("Total focus"): only flag mid-sentence.
   for (const b of BRANDS_CS) {
-    for (const m of text.matchAll(new RegExp(`\\b${b}\\b`, 'g'))) {
+    for (const m of text.matchAll(wordRe(b, 'g'))) {
       const before = text.slice(0, m.index).trimEnd()
       if (before !== '' && !/[.!?:;"'(\u201c\u2018]$/.test(before)) hits.push(b)
     }
@@ -291,14 +304,19 @@ function staticChecks(content: Content, sceneFiles: Map<string, string>): Refs {
   }
   for (const id of k.surpriseOfferTemplateIds)
     if (!ids.templates.has(id)) add('error', 'constants.surpriseOfferTemplateIds', `unknown template "${id}"`)
-  if (k.exchange.highMin <= k.exchange.midMin) add('error', 'constants.exchange', 'highMin must be > midMin')
-  for (const s of content.scenes) {
-    if (s.dynamic?.type !== 'exchange') continue
-    for (const tier of ['low', 'mid', 'high'] as const) {
-      const n = content.destinations.filter((d) => d.tier === tier).length
-      if (n < s.dynamic.count) add('warn', `destinations`, `tier "${tier}" has ${n} destinations (< count ${s.dynamic.count})`)
-    }
+  const employerNames = new Set(content.employers.map((e) => e.name.toLowerCase()))
+  const surpriseNames = new Set<string>()
+  for (const e of k.surpriseEmployers) {
+    const where = `constants.surpriseEmployers → ${e.name}`
+    if (!content.paths.some((p) => p.id === e.pathId)) add('error', where, `unknown path "${e.pathId}"`)
+    if (employerNames.has(e.name.toLowerCase())) add('error', where, 'already a regular employer (the surprise must be a new name)')
+    if (surpriseNames.has(e.name.toLowerCase())) add('error', where, 'duplicate name')
+    surpriseNames.add(e.name.toLowerCase())
   }
+  if (content.scenes.some((s) => s.dynamic?.type === 'exchange'))
+    for (const continent of EXCHANGE_CONTINENTS)
+      if (!content.destinations.some((d) => d.continent === continent))
+        add('error', 'destinations', `no destination on continent "${continent}"`)
   if (content.endings.length === 0) add('error', 'endings', 'no endings')
 
   // Flags
@@ -344,8 +362,10 @@ function forbiddenStrings(jsonFiles: { rel: string; data: unknown }[]): void {
   for (const { rel, data } of jsonFiles) {
     walkStrings(data, '', (s, path) => {
       const hits = CITATION_PATH.test(path) ? [] : brandHits(s)
-      if (hits.length) add('error', `${rel} → ${path}`, `real brand name(s) ${hits.join(', ')}: use a fictional name`)
+      if (hits.length) add('error', `${rel} → ${path}`, `real brand name(s) ${hits.join(', ')}: use the parody name (GAME_DESIGN.md §0)`)
       if (profHit(s)) add('error', `${rel} → ${path}`, 'the professor is only ever "PM" (full name found)')
+      const old = OLD_NAMES.filter((n) => wordRe(n, '').test(s))
+      if (old.length) add('warn', `${rel} → ${path}`, `old invented name(s) ${old.join(', ')}: use the parody names (GAME_DESIGN.md §0)`)
     })
   }
   // The professor's name must not appear anywhere in the repo's text files either.

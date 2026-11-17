@@ -2,13 +2,12 @@
  * Condition language (see src/content/schema.ts):
  *   "skillAi >= 60"  "age > 30"  "promotions >= 1"  "yearsInPath >= 10"   numeric stats + age/promotions/yearsInPath
  *   "temperature >= 2.5"  "footprintScore > 70"  "lifespan > 90"  "F < 5"   end metrics (projected during play)
- *   "path == finance"  "employer != panoptis"  "exchangeTier == high"  "phase == career"
+ *   "path == finance"  "employer != panoptis"  "phase == career"
  *   "profile.budget == tight"  "profile.origin == intl"  "profile.trait == math"
  *   "flag:TECH"  "!flag:SHALLOW"  "chose:c03_asso=asso_utopia"  "!chose:c10_after=phd"  "chose:c13_family"
  *   "true"  "false"
  *   { all: [...] } (empty = true)  { any: [...] } (empty = false)  { not: ... }
  * `path`/`employer` compare against "none" when there is no current job.
- * `exchangeTier` is the chosen destination's tier, or the current grade tier before the exchange.
  */
 import { NUMERIC_STATS, PHASES } from '../content/schema'
 import type { Cond, Content, NumericStat } from '../content/schema'
@@ -21,7 +20,6 @@ export const END_METRIC_KEYS = ['footprintScore', 'temperature', 'lifespan', 'F'
 export const CATEGORICAL_KEYS = [
   'path',
   'employer',
-  'exchangeTier',
   'phase',
   'profile.budget',
   'profile.origin',
@@ -56,7 +54,6 @@ const CATEGORICAL_KEY_SET = new Set<string>(CATEGORICAL_KEYS)
 const END_METRIC_SET = new Set<string>(END_METRIC_KEYS)
 const ID_RE = /^[A-Za-z0-9_.-]+$/
 const CMP_RE = /^([A-Za-z_][A-Za-z0-9_.]*)\s*(>=|<=|==|!=|>|<)\s*(\S+)$/
-const TIER_VALUES = new Set(['low', 'mid', 'high', 'none'])
 const PHASE_VALUES = new Set<string>(PHASES)
 
 const stringCache = new Map<string, CondNode>()
@@ -117,8 +114,6 @@ function parseStringUncached(src: string): CondNode {
   if (CATEGORICAL_KEY_SET.has(key)) {
     if (op !== '==' && op !== '!=') throw new ConditionError(src, `"${key}" only supports == and !=`)
     if (!ID_RE.test(raw)) throw new ConditionError(src, `bad value "${raw}"`)
-    if (key === 'exchangeTier' && !TIER_VALUES.has(raw))
-      throw new ConditionError(src, `exchangeTier must be low, mid, high or none`)
     if (key === 'phase' && !PHASE_VALUES.has(raw)) throw new ConditionError(src, `unknown phase "${raw}"`)
     return { t: 'cat', key: key as CategoricalKey, op, value: raw }
   }
@@ -188,13 +183,6 @@ export interface EvalEnv {
   project?: () => EndMetrics
 }
 
-export function gradeTier(content: Content, grades: number): 'low' | 'mid' | 'high' {
-  const t = content.constants.exchange
-  if (grades >= t.highMin) return 'high'
-  if (grades >= t.midMin) return 'mid'
-  return 'low'
-}
-
 function numericValue(node: Extract<CondNode, { t: 'num' }>, env: EvalEnv): number {
   const { state } = env
   switch (node.key) {
@@ -229,8 +217,6 @@ function categoricalValue(key: CategoricalKey, env: EvalEnv): string {
       return state.path?.pathId ?? 'none'
     case 'employer':
       return state.path?.employerId ?? 'none'
-    case 'exchangeTier':
-      return state.exchange?.tier ?? gradeTier(env.content, state.stats.grades)
     case 'phase':
       return state.phase
     case 'profile.budget':

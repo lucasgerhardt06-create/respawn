@@ -13,7 +13,7 @@ function baseState(): GameState {
   s.age = 31
   s.promotions = 1
   s.flags = ['TECH']
-  s.path = { pathId: 'consulting', employerId: 'sterling', employerName: 'Sterling & Pike', sinceAge: 20 }
+  s.path = { pathId: 'consulting', employerId: 'sterling', employerName: 'McKinsley', sinceAge: 20 }
   s.player.profile = { originId: 'intl', budgetId: 'tight', traitId: 'math' }
   return s
 }
@@ -41,7 +41,7 @@ describe('conditions: string forms', () => {
     expect(ev('yearsInPath >= 12', s)).toBe(false)
   })
 
-  it('path / employer / phase / exchangeTier / profile', () => {
+  it('path / employer / phase / profile', () => {
     expect(ev('path == consulting', s)).toBe(true)
     expect(ev('path != research', s)).toBe(true)
     expect(ev('employer == sterling', s)).toBe(true)
@@ -50,11 +50,6 @@ describe('conditions: string forms', () => {
     expect(ev('profile.budget == tight', s)).toBe(true)
     expect(ev('profile.origin == intl', s)).toBe(true)
     expect(ev('profile.trait == people', s)).toBe(false)
-    // before the exchange: tier from grades (55 → mid)
-    expect(ev('exchangeTier == mid', s)).toBe(true)
-    const after = cloneState(s)
-    after.exchange = { destinationId: 'd_ntu', tier: 'high' }
-    expect(ev('exchangeTier == high', after)).toBe(true)
     const jobless = cloneState(s)
     jobless.path = undefined
     expect(ev('path == none', jobless)).toBe(true)
@@ -107,7 +102,6 @@ describe('conditions: parse errors', () => {
     'money = 3',
     'flag:',
     '!money > 3',
-    'exchangeTier == ultra',
     'phase == retirement',
     'chose:a=b=c',
     'just words',
@@ -137,7 +131,6 @@ describe('conditions: parse errors', () => {
       'yearsInPath >= 10',
       'path == finance',
       'employer != panoptis',
-      'exchangeTier == high',
       'profile.budget == tight',
       'profile.origin == intl',
       'profile.trait == math',

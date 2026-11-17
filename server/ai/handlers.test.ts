@@ -115,18 +115,20 @@ describe('runTask', () => {
     expect(o).toMatchObject({ ok: true, data: { title: 'The old asso friend', choices: [{ templateId: 'big_risk_tech' }, { templateId: 'safe_small_gain' }] } })
   })
 
-  it('surprise: path must be in the list; pitch cut to 2 sentences', async () => {
+  it('surprise: the name must come from the menu (which fixes the path); pitch cut to 2 sentences', async () => {
     const offer = {
-      employerName: 'Quillfeather Labs',
-      tagline: 'We teach models to write grant proposals. Ironic, we know.',
-      pathId: 'research',
+      employerName: 'microsift',
+      tagline: 'Spreadsheets, clouds and a paperclip that judges you.',
       templateId: 'offer_mission_driven',
       pitch: 'Your lab internship caught our eye. We pay in impact and free coffee. Also, there is a ping-pong table.',
     }
     const o = await run('surprise', fakeProvider({ text: JSON.stringify(offer) }))
-    expect(o).toMatchObject({ ok: true, data: { pitch: 'Your lab internship caught our eye. We pay in impact and free coffee.' } })
-    const wrongPath = await run('surprise', fakeProvider({ text: JSON.stringify({ ...offer, pathId: 'finance' }) }))
-    expect(wrongPath).toMatchObject({ ok: false, reason: 'filtered' })
+    expect(o).toMatchObject({
+      ok: true,
+      data: { employerName: 'Microsift', pathId: 'bigtech', pitch: 'Your lab internship caught our eye. We pay in impact and free coffee.' },
+    })
+    const invented = await run('surprise', fakeProvider({ text: JSON.stringify({ ...offer, employerName: 'Quillfeather Labs' }) }))
+    expect(invented).toMatchObject({ ok: false, reason: 'filtered' })
   })
 
   it('epitaph: exactly 2 tips from the allowed sources', async () => {

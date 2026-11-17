@@ -112,13 +112,15 @@ const surprise: TaskDef<SurpriseInput, z.infer<typeof SurpriseOutput>, SurpriseO
   output: SurpriseOutput,
   user: surpriseUser,
   finalize(input, out, filter) {
-    if (!input.paths.some((p) => p.id === out.pathId)) return null
+    // Like templateId: the name must come from the menu (never invented); the menu also fixes the path.
+    const name = out.employerName.trim().toLowerCase()
+    const item = input.employers.find((e) => e.name.toLowerCase() === name)
+    if (!item) return null
     if (!input.templates.some((t) => t.id === out.templateId)) return null
-    const employerName = capped(acceptText(out.employerName, filter), 40)
     const tagline = capped(acceptText(out.tagline, filter), 90)
     const pitchRaw = acceptText(out.pitch, filter)
-    if (!employerName || !tagline || !pitchRaw) return null
-    return { employerName, tagline, pathId: out.pathId, templateId: out.templateId, pitch: firstSentences(pitchRaw, 2) }
+    if (!tagline || !pitchRaw) return null
+    return { employerName: item.name, tagline, pathId: item.pathId, templateId: out.templateId, pitch: firstSentences(pitchRaw, 2) }
   },
 }
 

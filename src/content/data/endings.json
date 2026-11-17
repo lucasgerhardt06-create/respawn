@@ -59,14 +59,14 @@
     "id": "end_doomscroll",
     "title": "Doomscroll Royalty",
     "description": "Millions knew your face, few knew you. You were always one post away from happy, for decades.",
-    "conditions": { "all": [{ "any": ["flag:personal_brand", "flag:CREATOR", "flag:reality_tv"] }, "fame >= 66", "happiness < 50"] },
+    "conditions": { "all": [{ "any": ["flag:personal_brand", "flag:CREATOR"] }, "fame >= 66", "happiness < 50"] },
     "priority": 82
   },
   {
     "id": "end_off_grid",
     "title": "Off-Grid Sage",
     "description": "Tomatoes, birdsong and a footprint so small the planet barely felt you. Your old classmates still don't understand, and envy you.",
-    "conditions": { "all": [{ "any": ["flag:low_tech_life", "flag:worked_farm"] }, "F <= 7"] },
+    "conditions": { "all": ["flag:low_tech_life", "F <= 7"] },
     "priority": 80
   },
   {
@@ -124,7 +124,7 @@
     "id": "end_analog_soul",
     "title": "Analog Soul",
     "description": "You kept your phone on a leash and your eyes on people. Your screen time report was a short read for sixty years.",
-    "conditions": { "all": ["flag:deleted_socials", { "any": ["flag:phone_intentional", "flag:kept_phone_3"] }] },
+    "conditions": { "all": ["flag:deleted_socials", { "any": ["flag:phone_intentional", "flag:kept_phone_1"] }] },
     "priority": 64
   },
   {

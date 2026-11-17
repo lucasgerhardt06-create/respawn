@@ -16,8 +16,10 @@ export const PROFESSOR_NAME_TOKENS: readonly string[] = PROFESSOR_TOKENS_REVERSE
 )
 
 /**
- * Real companies and brands the model must not name (case-insensitive, whole words).
- * Ambiguous everyday words (apple, amazon, shell, meta, total, oracle) are left out on purpose.
+ * Real companies and brands the model must not name (case-insensitive, whole words). The game uses
+ * the parody names from docs/GAME_DESIGN.md §0 instead; whole-word matching lets them through
+ * ("Goldmann Sax", "Envidia", "aiPhone", "Bain-Marie"). Ambiguous everyday words are in
+ * BRAND_BLOCKLIST_CASED instead, or left out (shell, total, oracle, slack).
  */
 export const BRAND_BLOCKLIST: readonly string[] = [
   'google', 'alphabet inc', 'youtube', 'facebook', 'instagram', 'whatsapp', 'tiktok', 'bytedance',
@@ -32,8 +34,13 @@ export const BRAND_BLOCKLIST: readonly string[] = [
   'peugeot', 'stellantis', 'ryanair', 'easyjet', 'air france', 'sncf', 'ratp', "mcdonald's",
   'mcdonalds', 'starbucks', 'coca-cola', 'nike', 'adidas', 'ikea', 'deliveroo', 'mistral ai',
   'hugging face', 'salesforce', 'ibm', 'intel', 'carrefour', 'decathlon', 'doctolib', 'blablacar',
-  'ubisoft', 'linkedin premium',
+  'ubisoft', 'linkedin', 'goldman', 'j.p. morgan', 'j.p.morgan', 'bcg', 'bain capital', 'bitcoin', 'interrail',
+  'oecd', 'united nations', 'doctors without borders', 'médecins sans frontières', 'institut pasteur',
+  'engie', 'edf',
 ]
+
+/** Brands that are also everyday words: blocked only with a capital letter ("Apple", not "apple pie"). */
+export const BRAND_BLOCKLIST_CASED: readonly string[] = ['Meta', 'Apple', 'Amazon']
 
 const META_PATTERNS = [
   /\bas an ai\b/i,
@@ -56,14 +63,17 @@ function escapeRe(s: string): string {
   return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
 
-function wordRe(term: string): RegExp {
+function wordRe(term: string, flags = 'iu'): RegExp {
   // \b does not work around accented letters or apostrophes, so use explicit lookarounds.
-  return new RegExp(`(^|[^\\p{L}\\p{N}])${escapeRe(term)}(?=$|[^\\p{L}\\p{N}])`, 'iu')
+  return new RegExp(`(^|[^\\p{L}\\p{N}])${escapeRe(term)}(?=$|[^\\p{L}\\p{N}])`, flags)
 }
 
 const PROFESSOR_RES = PROFESSOR_NAME_TOKENS.map((t) => [t, wordRe(t)] as const)
 const PROFESSOR_FULL_RE = new RegExp(PROFESSOR_NAME_TOKENS.map(escapeRe).join('\\s+'), 'iu')
-const BRAND_RES = BRAND_BLOCKLIST.map((b) => [b, wordRe(b)] as const)
+const BRAND_RES = [
+  ...BRAND_BLOCKLIST.map((b) => [b, wordRe(b)] as const),
+  ...BRAND_BLOCKLIST_CASED.map((b) => [b, wordRe(b, 'u')] as const),
+]
 
 /** Brands already present in the request (e.g. in the base text): echoing them is not the model's fault. */
 export function brandsIn(text: string): Set<string> {

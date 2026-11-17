@@ -50,7 +50,7 @@
           "stats": { "fame": 8, "happiness": -8, "social": -2, "grades": -4, "addiction": 10 },
           "flags": ["CREATOR"],
           "factId": "f_surgeon_general",
-          "text": "Your first video about the canteen gets 40,000 views. You check it 40,000 times."
+          "text": "Your first TikTac about the canteen gets 40,000 views. You check it 40,000 times."
         }
       }
     ]
@@ -122,7 +122,7 @@
         "label": "Party animal",
         "hint": "Legend status, hangover included",
         "effects": {
-          "stats": { "social": 10, "happiness": 4, "skillSoft": 6, "grades": -12, "energy": -8, "addiction": 20 },
+          "stats": { "social": 10, "happiness": 4, "skillSoft": 6, "grades": -12, "energy": -8, "addiction": 28 },
           "flags": ["party_animal"],
           "text": "Every bouncer at every sète knows your first name. Your 8AM self has filed a formal complaint."
         }
@@ -157,7 +157,7 @@
     "age": 20,
     "mandatory": true,
     "title": "Summer Internship",
-    "text": "Time for the mandatory three-month internship. Your feed is a wall of 'Thrilled to announce'. Your uncle still thinks AIDAMS is a brand of yoghurt. Where do you spend the summer?",
+    "text": "Time for the mandatory three-month internship. Your LinkedOut feed is a wall of 'Thrilled to announce'. Your uncle still thinks AIDAMS is a brand of yoghurt. Where do you spend the summer?",
     "art": "finance",
     "ai": {
       "tone": "ambitious, a little anxious",

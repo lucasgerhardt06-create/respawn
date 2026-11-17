@@ -97,7 +97,7 @@ describe('AI client', () => {
         { label: 'Just living in France', category: 'other', t: 580 },
         { label: 'Exchange flight', category: 'flights', t: 3.2, sceneId: 'c06_exchange' },
       ],
-      topChoices: [{ historyIndex: 3, sceneId: 'c11', title: 'First job', chosenLabel: 'Verdant', age: 22, impact: 9, alternatives: [] }],
+      topChoices: [{ historyIndex: 3, sceneId: 'c11', title: 'First job', chosenLabel: 'Doctors Without Orders', age: 22, impact: 9, alternatives: [] }],
       badges: [{ id: 'kept_it', label: 'Kept it', description: 'Kept the phone' }],
       stats: {},
       flags: [],

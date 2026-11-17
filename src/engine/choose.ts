@@ -69,7 +69,7 @@ export function chooseMut(content: Content, state: GameState, choiceId: string):
       applyEffects(content, state, c.effects, ctx)
       if (src.kind === 'destination') {
         const d = src.choice
-        state.exchange = { destinationId: d.id, tier: d.tier }
+        state.exchange = { destinationId: d.id }
         const r = applyFootprintEntry(
           state,
           { label: exchangeTripLabel(d.city, d.byTrain), category: d.byTrain ? 'travel' : 'flights', oneOffT: d.tripT },

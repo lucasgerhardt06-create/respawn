@@ -170,33 +170,43 @@ describe('dynamic choices', () => {
     expect(() => engine.choose(onlyUtopia, s, 'asso_utopia')).toThrow(/locked/)
   })
 
-  it('exchange: own tier offered, tier above greyed', () => {
-    const mid = pendingWith(base, 'c03_exchange', (s) => (s.stats.grades = 55))
-    const midChoices = sceneOf(content, mid).choices
-    const tierOf = (id: string) => content.destinations.find((d) => d.id === id)!.tier
-    expect(midChoices.filter((c) => !c.locked).map((c) => tierOf(c.id))).toEqual(['mid', 'mid'])
-    expect(midChoices.filter((c) => c.locked)).toHaveLength(1)
-    expect(midChoices.find((c) => c.locked)).toMatchObject({ lockedReason: 'Requires stronger grades' })
-    expect(tierOf(midChoices.find((c) => c.locked)!.id)).toBe('high')
+  it('exchange: each continent appears exactly once, nothing locked, grades play no part', () => {
+    const continentOf = (id: string) => content.destinations.find((d) => d.id === id)!.continent
+    for (const grades of [5, 55, 95]) {
+      const choices = sceneOf(content, pendingWith(base, 'c03_exchange', (s) => (s.stats.grades = grades))).choices
+      expect(choices.map((c) => continentOf(c.id))).toEqual(['europe', 'north_america', 'south_america', 'asia_oceania'])
+      expect(choices.every((c) => !c.locked)).toBe(true)
+    }
+  })
 
-    const high = sceneOf(content, pendingWith(base, 'c03_exchange', (s) => (s.stats.grades = 80))).choices
-    expect(high.map((c) => tierOf(c.id))).toEqual(['high', 'high'])
-    expect(high.every((c) => !c.locked)).toBe(true)
+  it('exchange: same seed = same draw', () => {
+    const draw = (seed: number) =>
+      sceneOf(content, pendingWith(start(seed), 'c03_exchange', () => {})).choices.map((c) => c.id)
+    expect(draw(42)).toEqual(draw(42))
+    const draws = new Set(Array.from({ length: 30 }, (_, i) => draw(i).join(',')))
+    expect(draws.size).toBeGreaterThan(1)
+  })
 
-    const low = sceneOf(content, pendingWith(base, 'c03_exchange', (s) => (s.stats.grades = 20))).choices
-    expect(low.filter((c) => !c.locked).map((c) => tierOf(c.id))).toEqual(['low', 'low'])
-    expect(tierOf(low.find((c) => c.locked)!.id)).toBe('mid')
+  it('exchange: each card shows the trip footprint', () => {
+    const choices = sceneOf(content, pendingWith(base, 'c03_exchange', () => {})).choices
+    for (const c of choices) {
+      const d = content.destinations.find((x) => x.id === c.id)!
+      expect(c.hint).toMatch(new RegExp(` · ${d.city} · ${d.byTrain ? 'Train' : 'Plane'} ≈ \\d+\\.\\d+ t$`))
+    }
   })
 
   it('exchange: choosing sets state.exchange and the trip footprint (train → travel)', () => {
-    const s = pendingWith(base, 'c03_exchange', (x) => (x.stats.grades = 80))
-    const r = engine.choose(content, s, 'd_ucl')
-    expect(r.state.exchange).toEqual({ destinationId: 'd_ucl', tier: 'high' })
+    const s = pendingWith(base, 'c03_exchange', () => {})
+    const offered = sceneOf(content, s).choices.map((c) => content.destinations.find((d) => d.id === c.id)!)
+    const train = offered.find((d) => d.byTrain)!
+    const plane = offered.find((d) => !d.byTrain)!
+    const r = engine.choose(content, s, train.id)
+    expect(r.state.exchange).toEqual({ destinationId: train.id })
     const trip = r.state.footprint.oneOffs.at(-1)!
-    expect(trip).toMatchObject({ category: 'travel', t: 0.03, sourceSceneId: 'c03_exchange' })
-    expect(r.outcome.tonnes).toBeCloseTo(0.03)
-    const f = engine.choose(content, s, 'd_ntu')
-    expect(f.state.footprint.oneOffs.at(-1)).toMatchObject({ category: 'flights', t: 3.2 })
+    expect(trip).toMatchObject({ category: 'travel', t: train.tripT, sourceSceneId: 'c03_exchange' })
+    expect(r.outcome.tonnes).toBeCloseTo(train.tripT)
+    const f = engine.choose(content, s, plane.id)
+    expect(f.state.footprint.oneOffs.at(-1)).toMatchObject({ category: 'flights', t: plane.tripT })
   })
 
   it('jobOffers: eligible draw + highest-prestige locked showcase + static choices', () => {
@@ -207,7 +217,7 @@ describe('dynamic choices', () => {
     for (const c of unlocked) expect(['sterling', 'quill', 'unilab']).toContain(c.id)
     const locked = choices.filter((c) => c.locked)
     expect(locked).toEqual([
-      { id: 'panoptis', label: 'Panoptis', hint: 'Defense analytics.', locked: true, lockedReason: 'Requires an AI club background' },
+      { id: 'panoptis', label: 'Palantire', hint: 'Defense analytics.', locked: true, lockedReason: 'Requires an AI club background' },
     ])
     expect(choices.at(-1)!.id).toBe('no_job')
 
@@ -250,6 +260,7 @@ describe('dynamic choices', () => {
 
   it('surprise offer: validated, inserted before static choices, rolls its template on hire', () => {
     const s = pendingWith(base, 'c05_job', () => {})
+    expect(engine.surpriseMenu(content, s).map((m) => m.name)).toContain('Nimbus Labs')
     const offer = { employerName: 'Nimbus Labs', tagline: 'Cloud-free AI', pathId: 'research', templateId: 'offer_solid', pitch: 'Join us.' }
     const withOffer = engine.injectSurpriseOffer(content, s, offer)
     const ids = sceneOf(content, withOffer).choices.map((c) => c.id)
@@ -264,11 +275,15 @@ describe('dynamic choices', () => {
     for (const bad of [
       null,
       { ...offer, templateId: 'big_risk' },
-      { ...offer, pathId: 'nope' },
       { ...offer, employerName: '  ' },
+      { ...offer, employerName: 'Invented Corp' }, // not in constants.surpriseEmployers
     ])
       expect(engine.injectSurpriseOffer(content, s, bad as never)).toEqual(s)
+    // the menu fixes the path, whatever the AI says; the canonical spelling is kept
+    const fixed = engine.injectSurpriseOffer(content, s, { ...offer, employerName: 'nimbus labs', pathId: 'nope' })
+    expect(fixed.pending?.surpriseOffer).toMatchObject({ employerName: 'Nimbus Labs', pathId: 'research' })
     const banned = pendingWith(base, 'c05_job', (x) => (x.bannedFields = ['research']))
+    expect(engine.surpriseMenu(content, banned).map((m) => m.name)).not.toContain('Nimbus Labs')
     expect(engine.injectSurpriseOffer(content, banned, offer).pending).toEqual(banned.pending)
     expect(engine.injectSurpriseOffer(content, withOffer, offer)).toEqual(withOffer) // only once
     const notJobs = pendingWith(base, 'c04_after', () => {})

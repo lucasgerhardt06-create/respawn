@@ -98,9 +98,12 @@ export const miniContent: Content = {
     },
     promotion: { effects: { stats: { money: 6, fame: 3 } } },
     aiEventSlots: [{ id: 'slot_career', age: 30, phase: 'career', fallbackSceneId: 'e_fallback_career' }],
-    exchange: { highMin: 72, midMin: 50 },
     flagMemories: { met_3am: 'met someone fascinating at 3AM', TECH: 'joined the AI club', skipped_pm: "skipped PM's 8AM class" },
     surpriseOfferTemplateIds: ['offer_solid'],
+    surpriseEmployers: [
+      { name: 'Nimbus Labs', pathId: 'research' },
+      { name: 'Envidia', pathId: 'consulting' },
+    ],
     badges: [{ id: 'kept_it', label: 'Kept it', description: 'Kept the old phone.' }],
   },
   profiles: {
@@ -210,7 +213,7 @@ export const miniContent: Content = {
       age: 20,
       title: 'Exchange destination',
       text: 'Pick your exchange.',
-      dynamic: { type: 'exchange', count: 2, lockedFromTierAbove: 1 },
+      dynamic: { type: 'exchange' },
       choices: [],
     },
     {
@@ -406,13 +409,13 @@ export const miniContent: Content = {
     { id: 'asso_oser', category: 'impact', school: 'ESSEC', blurb: 'Tutoring.', label: 'OSER', effects: { stats: { contribution: 5 } } },
   ],
   destinations: [
-    { id: 'd_ntu', tier: 'high', university: 'NTU', city: 'Singapore', country: 'Singapore', tripT: 3.2, label: 'NTU Singapore' },
-    { id: 'd_ucl', tier: 'high', university: 'UCL', city: 'London', country: 'UK', tripT: 0.03, byTrain: true, label: 'UCL London' },
-    { id: 'd_emory', tier: 'mid', university: 'Emory', city: 'Atlanta', country: 'USA', tripT: 2.0, label: 'Emory Atlanta' },
-    { id: 'd_erasmus', tier: 'mid', university: 'Erasmus', city: 'Rotterdam', country: 'Netherlands', tripT: 0.05, byTrain: true, label: 'Erasmus Rotterdam' },
-    { id: 'd_ets', tier: 'mid', university: 'ÉTS', city: 'Montréal', country: 'Canada', tripT: 1.5, label: 'ÉTS Montréal' },
-    { id: 'd_daejeon', tier: 'low', university: 'Daejeon University', city: 'Daejeon', country: 'Korea', tripT: 2.6, label: 'Daejeon' },
-    { id: 'd_chile', tier: 'low', university: 'Universidad de Chile', city: 'Santiago', country: 'Chile', tripT: 3.4, label: 'Santiago' },
+    { id: 'd_ntu', continent: 'asia_oceania', university: 'NTU', city: 'Singapore', country: 'Singapore', tripT: 3.2, label: 'NTU Singapore' },
+    { id: 'd_ucl', continent: 'europe', university: 'UCL', city: 'London', country: 'UK', tripT: 0.03, byTrain: true, label: 'UCL London' },
+    { id: 'd_emory', continent: 'north_america', university: 'Emory', city: 'Atlanta', country: 'USA', tripT: 2.0, label: 'Emory Atlanta' },
+    { id: 'd_erasmus', continent: 'europe', university: 'Erasmus', city: 'Rotterdam', country: 'Netherlands', tripT: 0.05, byTrain: true, label: 'Erasmus Rotterdam' },
+    { id: 'd_ets', continent: 'north_america', university: 'ÉTS', city: 'Montréal', country: 'Canada', tripT: 1.5, label: 'ÉTS Montréal' },
+    { id: 'd_daejeon', continent: 'asia_oceania', university: 'Daejeon University', city: 'Daejeon', country: 'Korea', tripT: 2.6, label: 'Daejeon' },
+    { id: 'd_chile', continent: 'south_america', university: 'Universidad de Chile', city: 'Santiago', country: 'Chile', tripT: 3.4, label: 'Santiago' },
   ],
   paths: [
     {
@@ -446,7 +449,7 @@ export const miniContent: Content = {
     },
   ],
   employers: [
-    { id: 'sterling', pathId: 'consulting', name: 'Sterling & Pike', tagline: 'Strategy consulting.', label: 'Sterling & Pike', prestige: 6, effects: { stats: { money: 10 } } },
+    { id: 'sterling', pathId: 'consulting', name: 'McKinsley', tagline: 'Strategy consulting.', label: 'McKinsley', prestige: 6, effects: { stats: { money: 10 } } },
     { id: 'quill', pathId: 'consulting', name: 'Quill Partners', tagline: 'Boutique consulting.', label: 'Quill Partners', prestige: 3 },
     {
       id: 'natlab',
@@ -462,9 +465,9 @@ export const miniContent: Content = {
     {
       id: 'panoptis',
       pathId: 'consulting',
-      name: 'Panoptis',
+      name: 'Palantire',
       tagline: 'Defense analytics.',
-      label: 'Panoptis',
+      label: 'Palantire',
       prestige: 9,
       conditions: 'flag:TECH',
       lockedReason: 'Requires an AI club background',

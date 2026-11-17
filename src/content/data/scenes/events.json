@@ -131,78 +131,6 @@
     ]
   },
   {
-    "id": "e_viral",
-    "kind": "event",
-    "phase": "career",
-    "family": "life",
-    "window": [
-      20.5,
-      35
-    ],
-    "p": 0.3,
-    "conditions": "screenHours >= 2",
-    "title": "You Went Viral",
-    "text": "A twelve-second clip of you falling into a fountain while explaining machine learning gets nine million views on Blipz, the video app everyone pretends not to use. Brands are in your messages. Your mum has seen it.",
-    "art": "home",
-    "ai": {
-      "tone": "absurd internet fame",
-      "hints": [
-        "Blipz is a fictional video app."
-      ]
-    },
-    "choices": [
-      {
-        "id": "e_viral_ride",
-        "label": "Ride the wave",
-        "hint": "Post every day while it lasts",
-        "effects": {
-          "stats": {
-            "fame": 10,
-            "happiness": 2,
-            "energy": -5,
-            "addiction": 6,
-            "screenHours": 1
-          },
-          "footprint": [
-            {
-              "label": "Your viral clips' watch time (influence)",
-              "category": "digital",
-              "influenceTPerYear": 400,
-              "factId": "f_influence"
-            }
-          ],
-          "text": "Fountain Guru becomes your nickname. A cereal brand sends you a fountain-shaped bowl."
-        }
-      },
-      {
-        "id": "e_viral_cash",
-        "label": "Take the brand deals",
-        "hint": "Monetise the fall",
-        "effects": {
-          "stats": {
-            "money": 5,
-            "fame": 5,
-            "ethics": -2,
-            "happiness": -1
-          },
-          "text": "You promote a protein bar you have never eaten. It pays for a holiday."
-        }
-      },
-      {
-        "id": "e_viral_off",
-        "label": "Log off until it passes",
-        "hint": "Fame is a weather system",
-        "effects": {
-          "stats": {
-            "happiness": 2,
-            "fame": 2
-          },
-          "text": "In two weeks, the internet has a new fountain. You keep the memes for your grandchildren."
-        }
-      }
-    ]
-  },
-  {
     "id": "e_pandemic",
     "kind": "event",
     "phase": "career",
@@ -211,7 +139,7 @@
       24,
       30
     ],
-    "p": 0.5,
+    "p": 0.35,
     "title": "The Pandemic",
     "text": "A new virus brings a new vocabulary: lockdown, cluster, 'you're on mute'. Your flat becomes your office, your gym and your entire social life. Two years lived through a screen. How do you get through it?",
     "art": "pandemic",
@@ -352,351 +280,6 @@
     ]
   },
   {
-    "id": "e_desert_festival",
-    "kind": "event",
-    "phase": "career",
-    "family": "life",
-    "window": [
-      24,
-      33
-    ],
-    "p": 0.25,
-    "title": "The Desert Festival",
-    "text": "Friends have tickets to a week-long art festival in a desert on the other side of the Atlantic: giant sculptures, dust storms, people in fur coats at noon. 'It will change your life,' they say, as they always do.",
-    "art": "beach",
-    "ai": {
-      "tone": "dusty, psychedelic, self-aware"
-    },
-    "choices": [
-      {
-        "id": "e_fest_go",
-        "label": "Fly out and go wild",
-        "hint": "Dust, art, enlightenment-ish",
-        "effects": {
-          "stats": {
-            "happiness": 6,
-            "social": 4,
-            "fame": 2,
-            "money": -5,
-            "addiction": 3
-          },
-          "flags": [
-            "flew",
-            "desert_festival"
-          ],
-          "footprint": [
-            {
-              "label": "Return flight to a desert festival",
-              "category": "flights",
-              "oneOffT": 2.0,
-              "factId": "f_long_haul"
-            }
-          ],
-          "text": "You come back with sand in places you didn't know you had and a new life philosophy that lasts three weeks."
-        }
-      },
-      {
-        "id": "e_fest_local",
-        "label": "Throw a local version instead",
-        "hint": "A field, a speaker, your people",
-        "effects": {
-          "stats": {
-            "social": 4,
-            "happiness": 3,
-            "energy": -3,
-            "money": -1
-          },
-          "text": "Forty friends, one field in the Vexin, a cardboard sculpture. Honestly better."
-        }
-      },
-      {
-        "id": "e_fest_stream",
-        "label": "Watch the livestream",
-        "hint": "Zero dust, zero magic",
-        "effects": {
-          "stats": {
-            "happiness": -1,
-            "money": 1
-          },
-          "text": "From your sofa it looks like a very dusty conference. You feel both smug and left out."
-        }
-      }
-    ]
-  },
-  {
-    "id": "e_reality_tv",
-    "kind": "event",
-    "phase": "career",
-    "family": "life",
-    "window": [
-      24,
-      34
-    ],
-    "p": 0.3,
-    "conditions": "fame >= 54",
-    "title": "Reality-TV Casting",
-    "text": "A producer calls: they're casting 'Startup Island', where twelve young professionals pitch, betray and fall in love on a beach. Your profile is 'exactly the energy we need'. Filming starts in a month.",
-    "art": "stage",
-    "ai": {
-      "tone": "trashy TV glamour, satirical"
-    },
-    "choices": [
-      {
-        "id": "e_tv_sign",
-        "label": "Sign the contract",
-        "hint": "Fame or meme",
-        "effects": {
-          "flags": [
-            "reality_tv"
-          ],
-          "stats": {
-            "energy": -5
-          }
-        },
-        "chance": {
-          "p": 0.45,
-          "modifiers": [
-            {
-              "stat": "skillSoft",
-              "per": 0.15
-            }
-          ],
-          "success": {
-            "stats": {
-              "fame": 12,
-              "money": 6,
-              "happiness": 2
-            },
-            "text": "Charisma check passed: you win 'Startup Island' with a pitch for compostable phone cases. You are briefly the most famous AIDAMS alum alive."
-          },
-          "failure": {
-            "stats": {
-              "fame": 4,
-              "happiness": -6,
-              "social": -4
-            },
-            "text": "Charisma check failed: the edit makes you the villain. A clip of you saying 'synergy' is now a meme in four languages."
-          }
-        }
-      },
-      {
-        "id": "e_tv_decline",
-        "label": "Politely decline",
-        "hint": "Your dignity is not for sale",
-        "effects": {
-          "stats": {
-            "happiness": 1
-          },
-          "text": "You watch the show anyway. The person they cast instead says 'synergy' a lot."
-        }
-      }
-    ]
-  },
-  {
-    "id": "e_crypto",
-    "kind": "event",
-    "phase": "career",
-    "family": "life",
-    "window": [
-      27,
-      42
-    ],
-    "p": 0.3,
-    "conditions": "money >= 45",
-    "title": "A Coin Called Moonshot",
-    "text": "A friend who never left the blockchain crowd swears by a new coin, $MOONSHOT. 'It's not a bubble, it's a community.' The chart is vertical. Your savings account earns 2% a year and looks at you sadly.",
-    "art": "finance",
-    "ai": {
-      "tone": "crypto-bro satire"
-    },
-    "choices": [
-      {
-        "id": "e_crypto_all",
-        "label": "All in with your savings",
-        "hint": "To the moon or the floor",
-        "chance": {
-          "p": 0.25,
-          "success": {
-            "stats": {
-              "money": 15,
-              "fame": 2,
-              "ethics": -2
-            },
-            "flags": [
-              "crypto_rich"
-            ],
-            "text": "You sell at the top by pure luck. You now say 'we' when talking about the coin."
-          },
-          "failure": {
-            "stats": {
-              "money": -15,
-              "happiness": -5
-            },
-            "flags": [
-              "crypto_rekt"
-            ],
-            "text": "$MOONSHOT goes to zero in a weekend. The founder's last post is a sunset in an undisclosed country."
-          }
-        },
-        "effects": {
-          "factId": "f_crypto_energy"
-        }
-      },
-      {
-        "id": "e_crypto_small",
-        "label": "A small bet, for fun",
-        "hint": "Money you can afford to lose",
-        "chance": {
-          "p": 0.4,
-          "success": {
-            "stats": {
-              "money": 3,
-              "happiness": 1
-            },
-            "text": "You make enough for a nice dinner. You tell everyone at the nice dinner."
-          },
-          "failure": {
-            "stats": {
-              "money": -2
-            },
-            "text": "Gone. Cheaper than a lesson, more expensive than a dinner."
-          }
-        }
-      },
-      {
-        "id": "e_crypto_pass",
-        "label": "Pass",
-        "hint": "Boring is a strategy",
-        "effects": {
-          "stats": {
-            "happiness": -1
-          },
-          "text": "For three months you feel stupid. Then the coin crashes and you feel very, very wise."
-        }
-      }
-    ]
-  },
-  {
-    "id": "e_wedding",
-    "kind": "event",
-    "phase": "career",
-    "family": "life",
-    "window": [
-      30.3,
-      33
-    ],
-    "p": 0.45,
-    "conditions": "flag:partner",
-    "title": "The Wedding Question",
-    "text": "Your partner proposes over breakfast, or maybe you do, it's hard to remember who blinked first. Now comes the hard part: everyone's mum has an opinion about the guest list.",
-    "art": "stage",
-    "variants": [
-      {
-        "conditions": "flag:met_3am",
-        "text": "Noa, the person from that 3AM conversation outside a sète, proposes over breakfast, or maybe you do. Now comes the hard part: everyone's mum has an opinion about the guest list."
-      }
-    ],
-    "ai": {
-      "tone": "romantic comedy",
-      "hints": [
-        "If flag met_3am, the partner is Noa: callback to 3AM."
-      ]
-    },
-    "choices": [
-      {
-        "id": "e_wed_big",
-        "label": "Big wedding, 150 guests",
-        "hint": "The party of the decade",
-        "effects": {
-          "stats": {
-            "social": 6,
-            "happiness": 4,
-            "fame": 2,
-            "money": -8
-          },
-          "flags": [
-            "married",
-            "big_wedding",
-            "flew"
-          ],
-          "footprint": [
-            {
-              "label": "Big wedding with guests flying in (design estimate)",
-              "category": "family",
-              "oneOffT": 4,
-              "factId": "f_long_haul"
-            }
-          ],
-          "text": "Uncle Gérard dances on a table. Your AIDAMS friends do a choreography. Everyone cries, including the caterer."
-        }
-      },
-      {
-        "id": "e_wed_destination",
-        "label": "Destination wedding in Bali",
-        "hint": "Sunsets for the photos",
-        "conditions": "money >= 55",
-        "lockedReason": "Requires Wealth ≥ 55",
-        "effects": {
-          "stats": {
-            "happiness": 6,
-            "fame": 4,
-            "social": 2,
-            "money": -10
-          },
-          "flags": [
-            "married",
-            "flew"
-          ],
-          "footprint": [
-            {
-              "label": "Destination wedding in Bali (you + 40 guests, design estimate)",
-              "category": "flights",
-              "oneOffT": 8,
-              "factId": "f_one_percent_flyers"
-            }
-          ],
-          "text": "The photos are unreal. Half your guests got sunburnt, the other half got food poisoning. Iconic."
-        }
-      },
-      {
-        "id": "e_wed_small",
-        "label": "Small, local, perfect",
-        "hint": "Town hall, then a long lunch",
-        "effects": {
-          "stats": {
-            "social": 3,
-            "happiness": 4,
-            "money": -2
-          },
-          "flags": [
-            "married"
-          ],
-          "footprint": [
-            {
-              "label": "Small local wedding",
-              "category": "family",
-              "oneOffT": 0.3
-            }
-          ],
-          "text": "Twenty people, a town hall, a long lunch under a lime tree. Nobody remembers the menu; everyone remembers the speeches."
-        }
-      },
-      {
-        "id": "e_wed_none",
-        "label": "No ceremony, just us",
-        "hint": "Love doesn't need a DJ",
-        "effects": {
-          "stats": {
-            "happiness": 2,
-            "money": 1,
-            "social": -1
-          },
-          "text": "You celebrate with a picnic and a bottle of something good. Your mum takes it personally for a year."
-        }
-      }
-    ]
-  },
-  {
     "id": "e_asso_friend",
     "kind": "event",
     "phase": "career",
@@ -818,95 +401,6 @@
             "happiness": -1
           },
           "text": "You say no over a long dinner. You both check the startup's news for years."
-        }
-      }
-    ]
-  },
-  {
-    "id": "e_grandparents",
-    "kind": "event",
-    "phase": "career",
-    "family": "life",
-    "window": [
-      32,
-      40
-    ],
-    "p": 0.3,
-    "title": "Your Grandparents Need Care",
-    "text": "Your grandmother calls to say she 'fell a little bit'. Your grandfather has started calling the TV remote 'the phone'. The family meeting is tonight, and everyone is looking at the one with the steady job.",
-    "art": "home",
-    "ai": {
-      "tone": "tender, bittersweet, a little funny"
-    },
-    "choices": [
-      {
-        "id": "e_gp_riviera",
-        "label": "The fanciest home on the Riviera",
-        "hint": "Sea view, spa, golf for nonagenarians",
-        "conditions": "money >= 60",
-        "lockedReason": "Requires Wealth ≥ 60",
-        "effects": {
-          "stats": {
-            "money": -10,
-            "happiness": 2,
-            "social": 2
-          },
-          "text": "Their residence has a sea view, a sommelier and a waiting list. Your grandmother calls it 'a bit much' and loves it."
-        }
-      },
-      {
-        "id": "e_gp_move_in",
-        "label": "Move them in with you",
-        "hint": "Full house, full heart",
-        "effects": {
-          "stats": {
-            "social": 6,
-            "happiness": 1,
-            "contribution": 3,
-            "energy": -8,
-            "money": -2
-          },
-          "flags": [
-            "grandparents_home"
-          ],
-          "text": "Your grandfather teaches your neighbours belote. Your grandmother reorganises your kitchen. Nobody sleeps, everyone laughs."
-        }
-      },
-      {
-        "id": "e_gp_sundays",
-        "label": "Visit every Sunday",
-        "hint": "Train, cake, the same stories",
-        "effects": {
-          "stats": {
-            "social": 4,
-            "happiness": 2,
-            "energy": -4
-          },
-          "footprint": [
-            {
-              "label": "Sunday train trips to your grandparents (5 years)",
-              "category": "travel",
-              "annual": {
-                "id": "grandparents_visits",
-                "tPerYear": 0.05,
-                "years": 5
-              }
-            }
-          ],
-          "text": "Every Sunday: the 10:42 train, a lemon tart, the same war story. You'll miss it one day, and you know it."
-        }
-      },
-      {
-        "id": "e_gp_far",
-        "label": "A cheap home, far away",
-        "hint": "Practical, a little painful",
-        "effects": {
-          "stats": {
-            "money": -2,
-            "happiness": -4,
-            "social": -2
-          },
-          "text": "It's clean, it's affordable, it's two hours away. You call on Tuesdays. Some Tuesdays."
         }
       }
     ]
@@ -1097,89 +591,6 @@
     ]
   },
   {
-    "id": "e_kid_phone",
-    "kind": "event",
-    "phase": "career",
-    "family": "life",
-    "window": [
-      38,
-      40
-    ],
-    "p": 0.4,
-    "conditions": "flag:family_kids",
-    "title": "Your Kid Wants a Phone",
-    "text": "Your kid, not even ten, has prepared a slide deck titled 'Why I Need a Phone', with a chart. 'Everyone in my class has one,' says slide four. You suspect slide four is lying.",
-    "speaker": "kid",
-    "art": "home",
-    "ai": {
-      "tone": "parenting comedy",
-      "hints": [
-        "Never gender the kid unless the narrator picks a name."
-      ]
-    },
-    "choices": [
-      {
-        "id": "e_kp_yes",
-        "label": "Yes, a brand-new phone",
-        "hint": "Instant hero status",
-        "effects": {
-          "stats": {
-            "social": 2,
-            "happiness": 1,
-            "money": -2
-          },
-          "flags": [
-            "kid_phone_early"
-          ],
-          "footprint": [
-            {
-              "label": "Your kid's first smartphone (new)",
-              "category": "digital",
-              "oneOffT": 0.085,
-              "materialsKg": 200,
-              "factId": "f_surgeon_general"
-            }
-          ],
-          "text": "You are the best parent in the world for exactly four days."
-        }
-      },
-      {
-        "id": "e_kp_brick",
-        "label": "A brick phone: calls and texts",
-        "hint": "Safety without the feed",
-        "effects": {
-          "stats": {
-            "social": -1,
-            "happiness": 1
-          },
-          "footprint": [
-            {
-              "label": "A basic phone for your kid",
-              "category": "digital",
-              "oneOffT": 0.02,
-              "materialsKg": 30
-            }
-          ],
-          "text": "Your kid calls it 'a calculator that rings'. It survives three falls down the stairs."
-        }
-      },
-      {
-        "id": "e_kp_wait",
-        "label": "Wait until fifteen",
-        "hint": "Be the meanest parent in class",
-        "effects": {
-          "stats": {
-            "social": -2,
-            "happiness": -1,
-            "contribution": 1
-          },
-          "factId": "f_surgeon_general",
-          "text": "Your kid sulks for a month, then discovers books, friends and climbing trees. The sulking resumes at thirteen."
-        }
-      }
-    ]
-  },
-  {
     "id": "e_pm_again",
     "kind": "event",
     "phase": "career",
@@ -1264,134 +675,6 @@
     ]
   },
   {
-    "id": "e_midlife",
-    "kind": "event",
-    "phase": "maturity",
-    "family": "life",
-    "window": [
-      42,
-      50
-    ],
-    "p": 0.35,
-    "title": "Midlife Crisis",
-    "text": "You catch your reflection in a shop window and don't recognise the tired adult in a fleece. Something inside you whispers 'now or never'. It is very loud. What do you do about it?",
-    "art": "garage",
-    "ai": {
-      "tone": "affectionate midlife comedy"
-    },
-    "choices": [
-      {
-        "id": "e_ml_car",
-        "label": "Buy a sports car",
-        "hint": "Vroom, regret, vroom",
-        "conditions": "money >= 55",
-        "lockedReason": "Requires Wealth ≥ 55",
-        "effects": {
-          "stats": {
-            "happiness": 4,
-            "fame": 3,
-            "money": -8
-          },
-          "flags": [
-            "sports_car"
-          ],
-          "footprint": [
-            {
-              "label": "Weekend sports car (fuel and manufacturing, design estimate)",
-              "category": "travel",
-              "annual": {
-                "id": "sports_car",
-                "tPerYear": 1.2,
-                "years": 10
-              }
-            }
-          ],
-          "text": "It's red, it's loud, and it fits exactly one person and no groceries."
-        }
-      },
-      {
-        "id": "e_ml_bike",
-        "label": "A motorbike and a leather jacket",
-        "hint": "Wind in what's left of your hair",
-        "chance": {
-          "p": 0.8,
-          "success": {
-            "stats": {
-              "happiness": 5,
-              "fame": 1,
-              "money": -4
-            },
-            "text": "Sunday mornings on country roads. You feel twenty-five, with better knees insurance."
-          },
-          "failure": {
-            "stats": {
-              "happiness": -4,
-              "energy": -10,
-              "money": -5
-            },
-            "text": "A gravel bend, a broken collarbone, a very long summer on the sofa."
-          }
-        },
-        "effects": {
-          "footprint": [
-            {
-              "label": "Weekend motorbike (design estimate)",
-              "category": "travel",
-              "annual": {
-                "id": "motorbike",
-                "tPerYear": 0.3,
-                "years": 10
-              }
-            }
-          ]
-        }
-      },
-      {
-        "id": "e_ml_marathon",
-        "label": "Run a marathon",
-        "hint": "Six months of training, one finish line",
-        "effects": {
-          "stats": {
-            "happiness": 4,
-            "energy": 6,
-            "fame": 1,
-            "social": -3
-          },
-          "text": "Six months of dawn runs and early nights, goodbye Friday drinks. Kilometre 35 is the worst moment of your life. Kilometre 42 is one of the best."
-        }
-      },
-      {
-        "id": "e_ml_tattoo",
-        "label": "Get a tattoo",
-        "hint": "Permanent decisions, at last",
-        "effects": {
-          "stats": {
-            "happiness": 3,
-            "fame": 1,
-            "money": -1
-          },
-          "text": "A small sprout on your wrist. Your younger colleagues say it's cringe. You think it means everything grows back."
-        }
-      },
-      {
-        "id": "e_ml_sabbatical",
-        "label": "Take a sabbatical year",
-        "hint": "Pause the whole thing",
-        "effects": {
-          "years": 1,
-          "stats": {
-            "happiness": 8,
-            "social": 2,
-            "energy": 10,
-            "money": -6,
-            "fame": -2
-          },
-          "text": "A year of books, walks, cooking and sleeping in. You come back calmer and slightly suspicious of meetings."
-        }
-      }
-    ]
-  },
-  {
     "id": "e_teen_anxiety",
     "kind": "event",
     "phase": "maturity",
@@ -1400,15 +683,10 @@
       44,
       47
     ],
-    "p": 0.7,
-    "conditions": {
-      "any": [
-        "flag:kids_tablets",
-        "flag:kid_phone_early"
-      ]
-    },
+    "p": 0.5,
+    "conditions": "flag:kids_tablets",
     "title": "Your Teenager",
-    "text": "Your teenager hasn't really slept in weeks. A phone glows under the duvet at 3AM, and the school nurse used the word 'anxiety' twice in one call. The screens that bought you quiet dinners have sent the bill.",
+    "text": "Your teenager hasn't really slept in weeks. TikTac glows under the duvet at 3AM, and the school nurse used the word 'anxiety' twice in one call. The screens that bought you quiet dinners have sent the bill.",
     "speaker": "kid",
     "art": "home",
     "ai": {
@@ -1486,11 +764,11 @@
             "employer == panoptis"
           ]
         },
-        "text": "Late one evening, a file lands in your inbox by mistake: the real client list behind Panoptis's 'public safety' contracts. It's bad. It's provable. Nobody knows you've seen it."
+        "text": "Late one evening, a file lands in your inbox by mistake: the real client list behind Palantire's 'public safety' contracts. It's bad. It's provable. Nobody knows you've seen it."
       },
       {
         "conditions": "employer == petrolia",
-        "text": "Late one evening, a file lands in your inbox by mistake: Petrolia's internal climate models, decades old and very accurate, next to its public statements. It's bad. It's provable. Nobody knows you've seen it."
+        "text": "Late one evening, a file lands in your inbox by mistake: TotalEnnemies's internal climate models, decades old and very accurate, next to its public statements. It's bad. It's provable. Nobody knows you've seen it."
       }
     ],
     "ai": {
@@ -1693,54 +971,6 @@
             },
             "text": "Economics check failed: you call it wrong, twice. The desk calls it 'a learning experience'."
           }
-        }
-      }
-    ]
-  },
-  {
-    "id": "e_vice_random",
-    "kind": "event",
-    "phase": "career",
-    "family": "life",
-    "window": [
-      26,
-      55
-    ],
-    "p": 0.1,
-    "conditions": "addiction < 30",
-    "title": "A New Habit",
-    "text": "It starts with a free bet on a sports app 'just for fun' after a bad week. Then it's every evening. You've never been a party person, so nobody notices, including you.",
-    "art": "home",
-    "ai": {
-      "tone": "quiet, a bit unsettling, no judgement"
-    },
-    "choices": [
-      {
-        "id": "e_vice_delete",
-        "label": "Delete the app now",
-        "hint": "Before it's a thing",
-        "effects": {
-          "stats": {
-            "happiness": -1,
-            "skillSoft": 2
-          },
-          "text": "You delete it on a Tuesday. On Wednesday your thumb looks for it. By Sunday it's gone."
-        }
-      },
-      {
-        "id": "e_vice_continue",
-        "label": "One more week",
-        "hint": "You've got this under control",
-        "effects": {
-          "stats": {
-            "addiction": 30,
-            "money": -4,
-            "happiness": -2
-          },
-          "flags": [
-            "gambling"
-          ],
-          "text": "One more week becomes one more year. The app sends you a birthday bonus."
         }
       }
     ]
@@ -1961,7 +1191,7 @@
             "rethought"
           ],
           "factId": "f_burnout_who",
-          "text": "You come back four days a week with a new rule: no emails after 7PM. The company survives. So do you."
+          "text": "You come back four days a week with a new rule: no Slacker after 7PM. The company survives. So do you."
         }
       }
     ],
@@ -1985,7 +1215,7 @@
     "ai": {
       "tone": "media storm, tense",
       "hints": [
-        "Tie the scandal to the employer archetype (surveillance, oil, finance, social media). Never a real company."
+        "Tie the scandal to {employer} and what it does (surveillance, oil, finance, social media). Use only the game's parody names, never a real company."
       ]
     },
     "choices": [
@@ -2004,7 +1234,7 @@
           "flags": [
             "scandal_owned"
           ],
-          "text": "You publish a long, honest post. Half the internet calls you brave, the other half calls you late. Both are right."
+          "text": "You publish a long, honest LinkedOut post. Half the internet calls you brave, the other half calls you late. Both are right."
         }
       },
       {
@@ -2052,7 +1282,7 @@
     "kind": "event",
     "phase": "career",
     "family": "consequence",
-    "conditions": "addiction > 60",
+    "conditions": "addiction > 57",
     "title": "It's Not Just a Habit",
     "text": "What started as 'just Thursdays' has quietly taken over your weeks. You've cancelled plans to keep the habit fed, and your mornings start with shaking hands. Someone who loves you finally says it out loud.",
     "art": "party",
@@ -2142,7 +1372,7 @@
       ]
     },
     "title": "Quiet Evenings",
-    "text": "Another Friday night with a ready meal and a muted TV. Your phone has notifications from work and from the bank, but nobody has called just to call in weeks. The silence has started to feel heavy.",
+    "text": "Another Friday night with a ready meal and a muted TV. Your phone has notifications from Slacker and from the bank, but nobody has called just to call in weeks. The silence has started to feel heavy.",
     "art": "home",
     "ai": {
       "tone": "gentle, melancholic, hopeful at the end"
@@ -2375,213 +1605,18 @@
     ]
   },
   {
-    "id": "e_ai_fb_headhunter",
-    "kind": "event",
-    "phase": "career",
-    "family": "life",
-    "followUpOnly": true,
-    "title": "The Headhunter",
-    "text": "A headhunter slides into your messages: 'Confidential opportunity, double your salary, very fast-paced environment.' The company name is redacted. The vibe is not.",
-    "art": "bigtech",
-    "ai": {
-      "tone": "corporate thriller, light"
-    },
-    "choices": [
-      {
-        "id": "e_fb27_call",
-        "label": "Take the call",
-        "hint": "Curiosity is a career skill",
-        "chance": {
-          "p": 0.5,
-          "modifiers": [
-            {
-              "stat": "network",
-              "per": 0.2
-            }
-          ],
-          "success": {
-            "stats": {
-              "money": 8,
-              "energy": -5,
-              "fame": 2
-            },
-            "text": "Network check passed: you negotiate a counter-offer with your current employer. Same desk, much bigger salary."
-          },
-          "failure": {
-            "stats": {
-              "happiness": -2,
-              "energy": -2
-            },
-            "text": "Network check failed: the 'opportunity' is a crypto exchange in a tax haven. You hang up politely."
-          }
-        }
-      },
-      {
-        "id": "e_fb27_ignore",
-        "label": "Ignore it",
-        "hint": "Your job is fine, thanks",
-        "effects": {
-          "stats": {
-            "happiness": 1
-          },
-          "text": "You archive it. Then you check your salary on a comparison site. Then you archive that too."
-        }
-      },
-      {
-        "id": "e_fb27_forward",
-        "label": "Forward it to a friend",
-        "hint": "Good karma, good network",
-        "effects": {
-          "stats": {
-            "social": 3,
-            "network": 2
-          },
-          "text": "Your friend gets the job and owes you dinner for life."
-        }
-      }
-    ]
-  },
-  {
-    "id": "e_ai_fb_moonshot",
-    "kind": "event",
-    "phase": "career",
-    "family": "life",
-    "followUpOnly": true,
-    "title": "The Moonshot",
-    "text": "Your manager closes the door: 'There's a secret project. Huge if it works, career-ending if it doesn't. I want you to lead it.' Behind them, the whiteboard says DO NOT ERASE in three colours.",
-    "art": "lab",
-    "ai": {
-      "tone": "high-stakes, excited"
-    },
-    "choices": [
-      {
-        "id": "e_fb34_lead",
-        "label": "Lead it",
-        "hint": "Glory or a cautionary tale",
-        "chance": {
-          "p": 0.4,
-          "modifiers": [
-            {
-              "stat": "skillAi",
-              "per": 0.15
-            },
-            {
-              "stat": "skillBusiness",
-              "per": 0.1
-            }
-          ],
-          "success": {
-            "stats": {
-              "money": 8,
-              "fame": 8,
-              "tech": 6,
-              "energy": -5
-            },
-            "text": "Math & AI and Economics check passed: it works. The demo gets a standing ovation, and the whiteboard goes in a museum. Well, a lobby."
-          },
-          "failure": {
-            "stats": {
-              "fame": -4,
-              "happiness": -4,
-              "energy": -6
-            },
-            "text": "Skill check failed: it doesn't work. The project is renamed 'a learning initiative' and quietly buried."
-          }
-        }
-      },
-      {
-        "id": "e_fb34_support",
-        "label": "Support from the side",
-        "hint": "Credit later, risk never",
-        "effects": {
-          "stats": {
-            "network": 3,
-            "energy": -2
-          },
-          "text": "You fix three key bugs and get a thank-you in slide 41."
-        }
-      },
-      {
-        "id": "e_fb34_decline",
-        "label": "Decline, protect your evenings",
-        "hint": "Ambition can wait",
-        "effects": {
-          "stats": {
-            "happiness": 3,
-            "fame": -2
-          },
-          "text": "Someone else takes it. You go to your kid's school play, or your friend's gig, and don't regret it."
-        }
-      }
-    ]
-  },
-  {
-    "id": "e_ai_fb_friend",
-    "kind": "event",
-    "phase": "maturity",
-    "family": "life",
-    "followUpOnly": true,
-    "title": "A Friend in Trouble",
-    "text": "An AIDAMS classmate you haven't seen in years calls. A divorce, debts, a startup that ate everything. They're not asking for money. They're asking for a weekend.",
-    "art": "home",
-    "ai": {
-      "tone": "warm, adult friendship"
-    },
-    "choices": [
-      {
-        "id": "e_fb51_drive",
-        "label": "Go there this weekend",
-        "hint": "Show up, that's all",
-        "effects": {
-          "stats": {
-            "social": 5,
-            "contribution": 3,
-            "energy": -4
-          },
-          "factId": "f_holt_lunstad",
-          "text": "Two days of walks, bad wine and good talk. They call it 'the weekend that saved me'."
-        }
-      },
-      {
-        "id": "e_fb51_lend",
-        "label": "Lend them money anyway",
-        "hint": "Generous, maybe awkward",
-        "effects": {
-          "stats": {
-            "money": -6,
-            "social": 3,
-            "contribution": 2
-          },
-          "text": "They pay you back four years later, with interest and a handwritten card."
-        }
-      },
-      {
-        "id": "e_fb51_text",
-        "label": "Send a kind message",
-        "hint": "Busy week, sorry",
-        "effects": {
-          "stats": {
-            "social": -1,
-            "happiness": -1
-          },
-          "text": "They reply 'thanks, no worries'. You both know it was a worry."
-        }
-      }
-    ]
-  },
-  {
     "id": "e_ai_fb_viral_elder",
     "kind": "event",
     "phase": "oldage",
     "family": "life",
     "followUpOnly": true,
     "title": "The Grandchild's Video",
-    "text": "Your grandchild wants to film you explaining 'how life was before AI' for a video. 'It could go viral.' You have opinions, a good jumper and nothing left to lose.",
+    "text": "Your grandchild wants to film you explaining 'how life was before AI' for TikTac. 'It could go viral.' You have opinions, a good jumper and nothing left to lose.",
     "art": "retirement",
     "variants": [
       {
         "conditions": "!flag:family_kids",
-        "text": "Your neighbour's grandchild wants to film you explaining 'how life was before AI' for a video. 'It could go viral.' You have opinions, a good jumper and nothing left to lose."
+        "text": "Your neighbour's grandchild wants to film you explaining 'how life was before AI' for TikTac. 'It could go viral.' You have opinions, a good jumper and nothing left to lose."
       }
     ],
     "ai": {
@@ -2633,71 +1668,6 @@
           },
           "factId": "f_device_manufacturing",
           "text": "You revive a twelve-year-old laptop together. It boots. You both cheer like it's a moon landing."
-        }
-      }
-    ]
-  },
-  {
-    "id": "e_school_choice",
-    "kind": "event",
-    "phase": "career",
-    "family": "life",
-    "window": [
-      35,
-      38
-    ],
-    "p": 0.35,
-    "conditions": "flag:family_kids",
-    "title": "Your Kid's School",
-    "text": "School applications. The local public school has a great teacher and a broken heater. The bilingual private school has a brochure with a horse on it. A forest school promises 'learning through mud'. Your kid wants the one with the best slide.",
-    "speaker": "kid",
-    "art": "home",
-    "ai": {
-      "tone": "parenting satire, warm",
-      "hints": [
-        "No judgement on any school choice."
-      ]
-    },
-    "choices": [
-      {
-        "id": "e_sch_public",
-        "label": "The local public school",
-        "hint": "Neighbours, walking distance",
-        "effects": {
-          "stats": {
-            "social": 3,
-            "contribution": 1,
-            "energy": -3
-          },
-          "text": "Your kid walks to school with the neighbours' kids and comes home with three new best friends and, thanks to the broken heater, a cold every winter."
-        }
-      },
-      {
-        "id": "e_sch_private",
-        "label": "The private bilingual school",
-        "hint": "Mandarin at six, fees forever",
-        "conditions": "money >= 50",
-        "lockedReason": "Requires Wealth ≥ 50",
-        "effects": {
-          "stats": {
-            "money": -7,
-            "fame": 2,
-            "social": -1
-          },
-          "text": "Your kid now corrects your English. The parents' group chat is a competitive sport."
-        }
-      },
-      {
-        "id": "e_sch_forest",
-        "label": "The forest school",
-        "hint": "Mud, trees, curiosity",
-        "effects": {
-          "stats": {
-            "happiness": 3,
-            "money": -3,
-            "energy": -2
-          },
-          "text": "Your kid knows twelve kinds of mushrooms and none of the times tables. Yet. Everyone is very happy and very muddy."
         }
       }
     ]
@@ -2821,251 +1791,6 @@
             "partner_no_kids"
           ],
           "text": "You hit every deadline that year. Your partner moves out in March. You notice in April."
-        }
-      }
-    ]
-  },
-  {
-    "id": "e_market_crash",
-    "kind": "event",
-    "phase": "maturity",
-    "family": "global",
-    "window": [
-      44,
-      52
-    ],
-    "p": 0.25,
-    "conditions": "money >= 45",
-    "title": "Market Crash",
-    "text": "Markets lose a third of their value in a month. The news uses the word 'unprecedented' every forty seconds. Your savings app now opens with a calming animation of a forest.",
-    "art": "finance",
-    "variants": [
-      {
-        "conditions": "path == finance",
-        "effects": {
-          "stats": {
-            "money": -3,
-            "energy": -5
-          }
-        }
-      }
-    ],
-    "ai": {
-      "tone": "financial panic satire",
-      "hints": [
-        "Economics check on buying the dip. If flag ai_investor or crypto_rich, callback."
-      ]
-    },
-    "choices": [
-      {
-        "id": "e_mc_sell",
-        "label": "Sell everything, now",
-        "hint": "Stop the bleeding",
-        "effects": {
-          "stats": {
-            "money": -6,
-            "happiness": -2
-          },
-          "text": "You sell at the bottom, like millions of others. The market recovers eighteen months later, without you."
-        }
-      },
-      {
-        "id": "e_mc_hold",
-        "label": "Hold and delete the app",
-        "hint": "Out of sight, out of panic",
-        "effects": {
-          "stats": {
-            "money": -1,
-            "happiness": 1
-          },
-          "text": "You stop looking. Two years later your savings are back where they were, and you slept fine."
-        }
-      },
-      {
-        "id": "e_mc_dip",
-        "label": "Buy the dip",
-        "hint": "Be greedy when others are fearful",
-        "chance": {
-          "p": 0.45,
-          "modifiers": [
-            {
-              "stat": "skillBusiness",
-              "per": 0.3
-            }
-          ],
-          "success": {
-            "stats": {
-              "money": 9,
-              "skillBusiness": 2
-            },
-            "text": "Economics check passed: you bought calmly at the bottom. Your portfolio thanks you for a decade."
-          },
-          "failure": {
-            "stats": {
-              "money": -8,
-              "happiness": -3
-            },
-            "text": "Economics check failed: you bought the dip, then the dip dipped. Twice."
-          }
-        }
-      }
-    ]
-  },
-  {
-    "id": "e_health_scare",
-    "kind": "event",
-    "phase": "maturity",
-    "family": "life",
-    "window": [
-      48,
-      58
-    ],
-    "p": 0.25,
-    "title": "The Check-Up",
-    "text": "A routine check-up. Your doctor looks at the blood test, then at you, then at the blood test again, and says 'hmm'. Nobody wants a 'hmm'. More tests next week.",
-    "art": "home",
-    "ai": {
-      "tone": "anxious, then relieved or resolute",
-      "hints": [
-        "Health check: years of sport, sleep and balance pay off here."
-      ]
-    },
-    "choices": [
-      {
-        "id": "e_hs_tests",
-        "label": "Do every test, then wait",
-        "hint": "Fear is a long week",
-        "chance": {
-          "p": 0.6,
-          "modifiers": [
-            {
-              "stat": "energy",
-              "per": 0.3
-            },
-            {
-              "stat": "addiction",
-              "per": -0.2
-            }
-          ],
-          "success": {
-            "stats": {
-              "happiness": 2
-            },
-            "text": "Health check passed: false alarm. Your years of decent sleep and Sunday runs paid off. You hug the receptionist."
-          },
-          "failure": {
-            "stats": {
-              "happiness": -5,
-              "energy": -10,
-              "money": -3
-            },
-            "flags": [
-              "health_issue"
-            ],
-            "text": "Health check failed: it's real, and treatable. A tough year of appointments, and a new respect for your body."
-          }
-        }
-      },
-      {
-        "id": "e_hs_change",
-        "label": "Change everything, starting today",
-        "hint": "Sport, sleep, fewer vices",
-        "effects": {
-          "stats": {
-            "energy": 10,
-            "addiction": -10,
-            "happiness": -1,
-            "money": -1
-          },
-          "text": "You swap the aperitif for a run and the late emails for sleep. Your doctor is impressed. So, quietly, are you."
-        }
-      },
-      {
-        "id": "e_hs_ignore",
-        "label": "Skip the follow-up",
-        "hint": "It's probably nothing",
-        "effects": {
-          "stats": {
-            "happiness": 1,
-            "energy": -8
-          },
-          "text": "It was probably nothing. Probably. You think about it every time you climb stairs."
-        }
-      }
-    ]
-  },
-  {
-    "id": "e_parents_aging",
-    "kind": "event",
-    "phase": "maturity",
-    "family": "life",
-    "window": [
-      52,
-      60
-    ],
-    "p": 0.3,
-    "title": "Your Parents, Older",
-    "text": "Your parent's voice on the phone sounds smaller than it used to. The diagnosis is manageable; the distance is not. The family group chat suddenly has a lot of very long messages.",
-    "art": "home",
-    "ai": {
-      "tone": "gentle, adult, bittersweet",
-      "hints": [
-        "Use the player's origin: far away (international), the small town, the suburbs."
-      ]
-    },
-    "choices": [
-      {
-        "id": "e_pa_close",
-        "label": "Move closer to them",
-        "hint": "Your career can wait a bit",
-        "effects": {
-          "stats": {
-            "social": 5,
-            "happiness": 2,
-            "contribution": 2,
-            "money": -4,
-            "fame": -2
-          },
-          "text": "You move forty minutes away. Sunday lunches come back. So do the old stories, which are better now."
-        }
-      },
-      {
-        "id": "e_pa_pay",
-        "label": "Pay for good care",
-        "hint": "Professionals, plus phone calls",
-        "conditions": "money >= 45",
-        "lockedReason": "Requires Wealth ≥ 45",
-        "effects": {
-          "stats": {
-            "money": -7,
-            "happiness": 1,
-            "social": 1
-          },
-          "text": "A nurse twice a day, a cleaner on Fridays, a video call every evening. Love, outsourced and still love."
-        }
-      },
-      {
-        "id": "e_pa_trains",
-        "label": "Visit every other weekend",
-        "hint": "Trains, tiredness, tenderness",
-        "effects": {
-          "stats": {
-            "social": 3,
-            "energy": -5,
-            "happiness": 1
-          },
-          "footprint": [
-            {
-              "label": "Weekend trips to your parents (5 years)",
-              "category": "travel",
-              "annual": {
-                "id": "parent_visits",
-                "tPerYear": 0.15,
-                "years": 5
-              }
-            }
-          ],
-          "text": "Friday evening trains, Sunday evening trains, and everything that matters in between."
         }
       }
     ]

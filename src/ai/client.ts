@@ -298,14 +298,16 @@ export function createAIClient(opts: AIClientOptions = {}): HttpAIClient {
       const key = `${ctx.age}:${templates.map((t) => t.id).join(',')}`
       return call('event', key, () => ({ ctx: clipContext(ctx), templates: templateRefs(templates) }), asEvent)
     },
-    generateSurpriseOffer(ctx, paths, templates) {
-      if (!paths.length || !templates.length) return Promise.resolve(null)
+    generateSurpriseOffer(ctx, employers, templates) {
+      if (!employers.length || !templates.length) return Promise.resolve(null)
       return call(
         'surprise',
         `${ctx.age}`,
         () => ({
           ctx: clipContext(ctx),
-          paths: paths.slice(0, 16).map((p) => ({ id: p.id, name: clip(p.name, 80) })),
+          employers: employers
+            .slice(0, 16)
+            .map((e) => ({ name: clip(e.name, 40), pathId: e.pathId, pathName: clip(e.pathName, 80) })),
           templates: templateRefs(templates),
         }),
         asSurprise,

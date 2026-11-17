@@ -4,7 +4,7 @@
     "name": "PM",
     "role": "Your professor",
     "description": "Teaches the 8AM class with unreasonable cheer and a squeaky marker. Remembers every face, and especially every empty seat. Never called anything but PM.",
-    "knownIf": { "any": ["flag:pm_went_1", "flag:pm_went_2", "flag:pm_went_3", "flag:skipped_pm"] }
+    "knownIf": { "any": ["flag:pm_went_1", "flag:pm_went_3", "flag:skipped_pm"] }
   },
   {
     "id": "roommate",

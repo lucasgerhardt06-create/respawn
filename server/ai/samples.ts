@@ -33,7 +33,7 @@ export const sampleCtx: AIContext = {
 }
 
 export const sampleScene: SceneView = {
-  id: 'm_pm_8am_2',
+  id: 'm_pm_8am_1',
   kind: 'mini',
   phase: 'aidams12',
   age: 19,
@@ -61,14 +61,14 @@ export const sampleMajorScene: SceneView = {
   majorIndex: 6,
   majorCount: 20,
   title: 'Year 3: your exchange destination',
-  text: 'Year 3 means leaving for a semester abroad. Your grades put you in the middle tier. Where do you go?',
+  text: 'Year 3 means leaving for a semester abroad. Four continents, one university each. Where do you go?',
   art: 'airport',
   narrate: true,
   choices: [
-    { id: 'dest_austin', label: 'UT Austin, Texas', locked: false },
-    { id: 'dest_rotterdam', label: 'Erasmus Rotterdam (by train)', locked: false },
-    { id: 'dest_montreal', label: 'ÉTS Montréal', locked: false },
-    { id: 'dest_singapore', label: 'NTU Singapore', locked: true, lockedReason: 'Requires grades ≥ 72' },
+    { id: 'dest_erasmus', label: 'Erasmus, Rotterdam', hint: 'Erasmus · Rotterdam · Train ≈ 0.03 t', locked: false },
+    { id: 'dest_utaustin', label: 'UT Austin, Texas', hint: 'UT Austin · Austin · Plane ≈ 2.1 t', locked: false },
+    { id: 'dest_uchile', label: 'Universidad de Chile, Santiago', hint: 'Universidad de Chile · Santiago · Plane ≈ 3.4 t', locked: false },
+    { id: 'dest_ntu', label: 'NTU, Singapore', hint: 'NTU · Singapore · Plane ≈ 3.2 t', locked: false },
   ],
   isFollowUp: false,
   isAiEvent: false,
@@ -79,19 +79,19 @@ const careerCtx: AIContext = {
   age: 34,
   phase: 'career',
   gauges: { money: 71, happiness: 47, social: 49, fame: 58, contribution: 41, energy: 'low' },
-  career: { path: 'Big Tech / AI product', employer: 'Tramontane AI', years: 8, promotions: 2 },
+  career: { path: 'Big Tech / AI product', employer: 'OpenEye', years: 8, promotions: 2 },
   exchange: 'UT Austin, Texas (flew there, a few weekend trips)',
   memories: [...sampleCtx.memories, 'grinds 55-hour weeks', 'partner and kids with screens limited'],
   recentChoices: [
     '22 · After AIDAMS → Take the offer now',
-    '22 · Your first real job → Tramontane AI',
+    '22 · Your first real job → OpenEye',
     '25 · Work rhythm → Grind 55h+',
     '30 · Family → Partner and kids, screens limited',
     '33 · Flagship project → Scale it at all costs',
   ],
   characters: [
     ...sampleCtx.characters,
-    { id: 'manager', name: 'Hélène', role: 'your first manager at Tramontane AI' },
+    { id: 'manager', name: 'Hélène', role: 'your first manager at OpenEye' },
   ],
 }
 
@@ -111,10 +111,10 @@ export const samples: Record<Task, unknown> = {
   event: { ctx: careerCtx, templates } satisfies EventInput,
   surprise: {
     ctx: { ...sampleCtx, age: 22, phase: 'launch', memories: [...sampleCtx.memories, 'interned at a CentraleSupélec research lab'] },
-    paths: [
-      { id: 'bigtech', name: 'Big Tech / AI product' },
-      { id: 'research', name: 'Research' },
-      { id: 'ngo', name: 'NGO / impact' },
+    employers: [
+      { name: 'Envidia', pathId: 'bigtech', pathName: 'Big Tech / AI product' },
+      { name: 'Microsift', pathId: 'bigtech', pathName: 'Big Tech / AI product' },
+      { name: 'BCJ', pathId: 'consulting', pathName: 'Consulting' },
     ],
     templates: [
       { id: 'offer_high_pay_low_impact', description: 'very well paid, prestige up, impact down' },
@@ -144,11 +144,11 @@ export const samples: Record<Task, unknown> = {
         { label: 'Return flight Paris–Austin (exchange)', t: 2.1 },
       ],
       topChoices: [
-        { title: 'Your first real job', chosenLabel: 'Tramontane AI', age: 22 },
+        { title: 'Your first real job', chosenLabel: 'OpenEye', age: 22 },
         { title: 'Work rhythm', chosenLabel: 'Grind 55h+', age: 25 },
         { title: 'What do you do with your money?', chosenLabel: 'Two long-haul holidays a year', age: 45 },
       ],
-      path: { pathName: 'Big Tech / AI product', employerName: 'Tramontane AI' },
+      path: { pathName: 'Big Tech / AI product', employerName: 'OpenEye' },
       badges: ['Kept it'],
     },
   } satisfies EpitaphInput,

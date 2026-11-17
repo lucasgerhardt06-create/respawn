@@ -64,7 +64,7 @@ export type Phase = z.infer<typeof Phase>
 //
 // String forms:
 //   "skillAi >= 60"   "age > 30"   "grades < 50"            (any numeric stat or: age, promotions, yearsInPath)
-//   "path == finance" "employer != panoptis" "exchangeTier == high"
+//   "path == finance" "employer != panoptis"
 //   "profile.budget == tight"  "profile.origin == intl"  "profile.trait == math"
 //   "flag:TECH"  "!flag:SHALLOW"
 //   "chose:c03_asso=asso_utopia"   (a recorded choice)
@@ -204,15 +204,8 @@ export type Choice = z.infer<typeof Choice>
 export const DynamicChoices = z.discriminatedUnion('type', [
   /** One asso per category drawn from assos.json + a "no association" static choice. */
   z.object({ type: z.literal('assoDraw') }).strict(),
-  /** Destinations of the player's grade tier + `lockedFromTierAbove` greyed ones from the tier above. */
-  z
-    .object({
-      type: z.literal('exchange'),
-      /** How many destinations of the player's tier to offer (drawn). */
-      count: z.number().int().positive(),
-      lockedFromTierAbove: z.number().int().nonnegative(),
-    })
-    .strict(),
+  /** One destination drawn per continent (seeded), nothing locked. */
+  z.object({ type: z.literal('exchange') }).strict(),
   /** `count` eligible employers + up to `lockedCount` locked ones + optional AI surprise slot. */
   z
     .object({
@@ -300,9 +293,10 @@ export const Asso = Choice.extend({
 }).strict()
 export type Asso = z.infer<typeof Asso>
 
-export const EXCHANGE_TIERS = ['low', 'mid', 'high'] as const
+/** Exchange continents: C06 offers one destination drawn from each (grades play no part). */
+export const EXCHANGE_CONTINENTS = ['europe', 'north_america', 'south_america', 'asia_oceania'] as const
 export const Destination = Choice.extend({
-  tier: z.enum(EXCHANGE_TIERS),
+  continent: z.enum(EXCHANGE_CONTINENTS),
   university: z.string(),
   city: z.string(),
   country: z.string(),
@@ -479,12 +473,15 @@ export const Constants = z
     aiEventSlots: z
       .array(z.object({ id: z.string(), age: z.number(), phase: Phase, fallbackSceneId: z.string() }).strict())
       .max(6),
-    /** Grade thresholds for exchange tiers (grades >= highMin → high, >= midMin → mid, else low). */
-    exchange: z.object({ highMin: z.number(), midMin: z.number() }).strict(),
     /** Flag → human memory sentence for the AI context ("asso_automatants": "joined Automatants, the AI club"). */
     flagMemories: z.record(z.string(), z.string()),
     /** Templates the AI may use for the C11 surprise offer (effects on hire). */
     surpriseOfferTemplateIds: z.array(z.string()),
+    /**
+     * The only names the AI may give the C11 surprise employer: parody names from GAME_DESIGN.md §0
+     * that are not regular employers, each tied to a career path (the AI picks one; it never invents one).
+     */
+    surpriseEmployers: z.array(z.object({ name: z.string().min(2).max(40), pathId: z.string() }).strict()).min(1),
     badges: z.array(Badge),
   })
   .strict()

@@ -3,7 +3,7 @@
  * Every exported function returns a new state; inputs are never mutated.
  */
 import type { Content } from '../content/schema'
-import { injectAiEvent, injectSurpriseOffer, setStartupMeta } from './ai'
+import { injectAiEvent, injectSurpriseOffer, setStartupMeta, surpriseMenu } from './ai'
 import { buildAiContext } from './aiContext'
 import { choose } from './choose'
 import { cloneState } from './clone'
@@ -33,6 +33,7 @@ export {
   respawnSimulate,
   setStartupMeta,
   summarize,
+  surpriseMenu,
 }
 
 export const engine: EngineAPI = {
@@ -42,6 +43,7 @@ export const engine: EngineAPI = {
   choose,
   injectAiEvent,
   injectSurpriseOffer,
+  surpriseMenu,
   setStartupMeta,
   summarize,
   respawnSimulate,
@@ -51,7 +53,7 @@ export const engine: EngineAPI = {
 }
 
 // Helpers for tools and tests (not part of EngineAPI).
-export { parseCondition, evaluate, walkCondition, ConditionError, gradeTier } from './conditions'
+export { parseCondition, evaluate, walkCondition, ConditionError } from './conditions'
 export type { CondNode, EndMetrics } from './conditions'
 export { computeEarth, footprintScore, interpolate, lifespanFor, temperatureFor, makeEnv } from './planet'
 export { diminish, arrowFor } from './stats'

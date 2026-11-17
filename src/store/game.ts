@@ -181,11 +181,11 @@ export const useGame = create<Store>((set, get) => {
     if (get().surprise?.sceneId === sceneId && get().surprise?.status === 'loading') return
     set({ surprise: { sceneId, status: 'loading' } })
     const historyLen = game.history.length
-    const paths = content.paths.filter((p) => !game.bannedFields.includes(p.field)).map((p) => ({ id: p.id, name: p.name }))
+    const employers = engine.surpriseMenu(content, game)
     const ids = content.constants.surpriseOfferTemplateIds
     const templates = content.aiTemplates.filter((t) => ids.includes(t.id))
     void ai
-      .generateSurpriseOffer(engine.buildAiContext(content, game), paths, templates)
+      .generateSurpriseOffer(engine.buildAiContext(content, game), employers, templates)
       .catch(() => null)
       .then((offer) => {
         const s = get()

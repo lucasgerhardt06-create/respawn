@@ -9,7 +9,7 @@ import { summarize } from '../src/engine/summary.ts'
 import type { EndSummary, YouPole } from '../src/engine/types.ts'
 import { loadContent } from './lib/loadContent.ts'
 import { STRATEGIES, STRATEGY_LABEL, meanOf, playLife, quantile } from './lib/lives.ts'
-import type { Strategy } from './lib/lives.ts'
+import type { DecisionCounts, Strategy } from './lib/lives.ts'
 
 function arg(name: string, fallback: number): number {
   const i = process.argv.findIndex((a) => a === `--${name}` || a.startsWith(`--${name}=`))
@@ -37,18 +37,23 @@ interface Run {
   picks: Map<string, Map<string, number>>
   offered: Map<string, number>
   errors: Map<string, number>
+  /** Every decision per life (single-option ones included), by scene kind. */
+  decisions: DecisionCounts[]
   ms: number
 }
 
 function run(content: Content, strategy: Strategy): Run {
-  const r: Run = { strategy, summaries: [], picks: new Map(), offered: new Map(), errors: new Map(), ms: 0 }
+  const r: Run = { strategy, summaries: [], picks: new Map(), offered: new Map(), errors: new Map(), decisions: [], ms: 0 }
   const t0 = performance.now()
   for (let seed = 0; seed < N; seed++) {
+    const counts: DecisionCounts = { major: 0, mini: 0, event: 0, total: 0 }
     try {
       const s = playLife(content, 100_000 + seed, {
         strategy,
         samples: SAMPLES,
         onDecision: (d) => {
+          counts[d.kind]++
+          counts.total++
           if (d.unlocked.length < 2 || d.kind !== 'major' || (strategy !== 'random' && d.indifferent)) return
           r.offered.set(d.sceneId, (r.offered.get(d.sceneId) ?? 0) + 1)
           let m = r.picks.get(d.sceneId)
@@ -57,6 +62,7 @@ function run(content: Content, strategy: Strategy): Run {
         },
       })
       r.summaries.push(summarize(content, s))
+      r.decisions.push(counts)
     } catch (e) {
       const msg = (e as Error).message
       r.errors.set(msg, (r.errors.get(msg) ?? 0) + 1)
@@ -115,6 +121,17 @@ async function main() {
         `  ${''.padEnd(17)} ${top.join(' · ') || '(none)'}`,
     )
     for (const [msg, n] of r.errors) console.log(`  ${''.padEnd(17)} ERROR ×${n}: ${msg}`)
+  }
+
+  console.log('\nDecisions per life (every scene played, single-option ones included): mean [p90]')
+  console.log(`  ${'strategy'.padEnd(17)}${['total', 'major', 'mini', 'event'].map((k) => k.padEnd(14)).join('')}`)
+  for (const r of runs) {
+    const cell = (k: keyof DecisionCounts) => {
+      const xs = r.decisions.map((d) => d[k])
+      const sorted = xs.slice().sort((a, b) => a - b)
+      return `${fmt(meanOf(xs))} [${quantile(sorted, 0.9)}]`.padEnd(14)
+    }
+    console.log(`  ${STRATEGY_LABEL[r.strategy].padEnd(17)}${cell('total')}${cell('major')}${cell('mini')}${cell('event')}`)
   }
 
   // Dominance flags

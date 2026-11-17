@@ -7,10 +7,26 @@ Consolidated from the team Google Doc "Cohesion Day - group 7" (tab "Plan comple
 ## 0. Non-negotiables
 
 1. **Language: English.** All player-facing text in English.
-2. **No real company or brand names.** Employers are fictional but recognisable archetypes (a defense-analytics giant, an oil major, a social-media giant...). Real schools and student associations are OK (ESSEC, CentraleSupélec, partner universities, assos).
+2. **No real company or brand in scene text: each one gets a recognisable parody from the official name list below**, and the game never invents other company names (the player's own startup, its investors and rivals excepted). ESSEC, CentraleSupélec, AIDAMS, the student associations and the partner universities keep their real names. Real names appear only where sources must be named (`facts.json` sources, the "about the data" lines).
+
+   **Official name list** (source of truth; `server/ai/filter.ts` and `tools/check-data.ts` reject the real names, `server/ai/filter.test.ts` checks every row):
+
+   | Real name | In the game |
+   |---|---|
+   | LinkedIn / YouTube / Instagram / TikTok / Facebook | LinkedOut / YouTub / InstaGran / TikTac / FaceBuk |
+   | ChatGPT / OpenAI / Bitcoin | ChatGBT / OpenEye / Bitcorn |
+   | Google / Meta / Apple / Amazon / Microsoft / Nvidia | Goggle / Metta / Appel / Amazoom / Microsift / Envidia |
+   | Goldman Sachs / J.P. Morgan | Goldmann Sax / J.B. Morgane |
+   | McKinsey / BCG / Bain | McKinsley / BCJ / Bain-Marie |
+   | Interrail | InterRêve |
+   | United Nations / OECD | United Notions / OECB |
+   | Doctors Without Borders · Slack · iPhone | Doctors Without Orders (NGO) · Slacker (work chat) · aiPhone (Appel's phone) |
+   | Palantir · TotalEnergies · LVMH · BlackRock · EDF · DeepMind · Institut Pasteur | Palantire · TotalEnnemies · LVMeh · GreenRock · EDEffort · DeepBlind · Institut Pasteurisé |
+
+   The last row extends the original list for employers that had no match (team decision, Nov 2026).
 3. **The professor is only ever called "PM".** Never write his full name anywhere (code, data, prompts, comments).
 4. **Locked choices are shown, greyed out, with the reason** ("Requires grades ≥ 75"). Never hide them.
-5. **Exchange (Year 3) is mandatory** for everyone. The choice is *where* (gated by grades) and *how much you travel* while there. The summer after the exchange is a mandatory research paper.
+5. **Exchange (Year 3) is mandatory** for everyone. The choice is *where* (one university per continent, drawn at random; grades play no part) and *how much you travel* while there. The summer after the exchange is a mandatory research paper.
 6. **If a job is lost to AI, you cannot be re-employed in the same field.**
 7. **AI is always on.** Every scene is narrated by Claude. The engine still decides every number, and every scene has a base text so the game never blocks if the network drops.
 8. **What matters most is the big life choices** (which employer, which career, flights, family, ethics), not gadgets. Devices are a light recurring temptation, not a major choice.
@@ -23,7 +39,7 @@ A pixel-art life sim played on a phone in ~12 minutes. You are admitted to AIDAM
 1. **YOU**: a 6-pole radar of your life.
 2. **THE EARTH IN 2100 if 8 billion people lived like you**: temperature, ocean rise, biodiversity, livability, tech progress, AI advancement — computed from real data.
 3. **Your carbon receipt**: your life as a till receipt, line by line, each line sourced.
-4. **Your epitaph**, written by Claude (obituary + "the LinkedIn post of your life" + 2 concrete tips).
+4. **Your epitaph**, written by Claude (obituary + "the LinkedOut post of your life" + 2 concrete tips).
 5. **RESPAWN**: go back to one of the 3 choices that weighed most and see the other life's radar overlaid on yours.
 
 The message (environment, digital sobriety, social impact) passes through trade-offs, never lectures. The planet is **hidden during play** (only ambient cues: the sky warms, the sea line rises in the pixel scene) and **revealed at the end** — that reveal is the awareness shock.
@@ -34,8 +50,9 @@ References for feel: Reigns (one decision per card, punchy), BitLife (life sim b
 
 Read a short scene (2–4 sentences, narrated by AI for *you*) → pick one of 2–5 options (locked ones greyed) → a one-line consequence with ↑↓ arrows on gauges and sometimes a "Did you know?" fact with its source → time jumps.
 
-- ~20 **major** choices (count toward the life), ~8–12 **minis** (1 tap: PM's 8AM class, parties, temptations), 3–6 **events** (global, consequence, life), 3–4 **AI-generated events** built from templates.
-- A full life: 10–14 minutes, < 30 s per decision.
+- **20 major** choices carry the story. Around them, few small moments: ~3 **minis** per life (1 tap: PM's 8AM class, one sète and its 3AM, the new phone) and ~4–5 **events**, mostly the ones whose outcome depends on earlier choices (AI shock, pandemic, war, heatwaves, burnout, scandal, addiction, loneliness, divorce, startup exit, PM again), including **one AI-generated event** (age 68) built from templates.
+- Pacing target: **≤ 28 decisions per life on average, p90 ≤ 31** (`tools/pacing.test.ts`; `npm run simulate` prints the split). A full life is about 11–12 minutes at ~25 s per decision.
+- The internship (C09) ends with a return-offer skill check that can open prestigious employers at C11.
 - Long options consume more years ("stay 20 years") and can skip later scenes.
 
 ## 3. Stats
@@ -60,7 +77,7 @@ Feedback shows only arrows (↑, ↑↑, ↓…), never exact numbers.
 | skillSoft | Charisma | theatre, sport, parties, associations | negotiations, pitches, promotions, relationships |
 | energy | Health | sleep, sport, balance | burnout < 20 |
 | network | Network | assos, forums, sètes, alumni | hidden offers, fundraising |
-| grades | Grades | studying, PM's class | exchange tier |
+| grades | Grades | studying, PM's class | research-lab internship, PhD |
 | ethics | Integrity | refusing shady projects | scandal, endings |
 
 Skill checks: `chance.modifiers` on skills ("Case interview: Economics + Charisma check") and locked reasons using display names ("Requires Math & AI ≥ 60"). The character sheet shows the change after each choice (+Math & AI).
@@ -71,7 +88,7 @@ Skill checks: `chance.modifiers` on skills ("Case interview: Economics + Charism
 | energy | 0–100 | < 20 triggers burnout |
 | network | 0–100 | Hidden offers, fundraising |
 | ethics | −50..50 | Scandal < −30; colours narration and endings |
-| grades | 0–100 | Student years only; gates exchange tier |
+| grades | 0–100 | Student years; research-lab internship, PhD |
 | addiction | 0–100 | Raised by parties/vices; costs lifespan and happiness |
 | tech, ai | 0–100 | Your contribution to tech/AI progress (planet graph) |
 | aiLever | −0.10..+0.05 | How your work bends world emissions (AI for climate vs scale-at-all-costs) |
@@ -139,12 +156,12 @@ The 3 most impactful major choices (impact = Σ|visible deltas| + 10 × tonnes c
 | Phase | Age | Majors | Minis / events |
 |---|---|---|---|
 | 0. Arrival | 18 | C01 | Random profile reveal |
-| 1. AIDAMS Y1–Y2 | 18–20 | C02–C05 | PM 8AM ×3, sètes ×2 (+3AM), first phone temptation |
-| 2. AIDAMS Y3–Y4 | 20–22 | C06–C09 | Grades reveal, exchange life |
+| 1. AIDAMS Y1–Y2 | 18–20 | C02–C05 | PM 8AM ×2, one sète (+3AM), first phone temptation |
+| 2. AIDAMS Y3–Y4 | 20–22 | C06–C09 | Return-offer skill check inside C09 |
 | 3. Launch | 22–25 | C10–C11 | Pandemic window |
-| 4. Career | 25–45 | C12–C16 | AI shock, burnout, temptations, AI events |
+| 4. Career | 25–45 | C12–C16 | AI shock, burnout, loneliness, teen anxiety, old asso friend |
 | 5. Maturity | 45–65 | C17–C18 | War/energy crisis, whistleblower |
-| 6. Old age | 65–death | C19–C20 | Heatwaves if T ≥ 2.5 °C |
+| 6. Old age | 65–death | C19–C20 | One AI-generated event (68), heatwaves if T ≥ 2.5 °C |
 
 Student years ≈ 9 majors of 20 (a little under half the decisions, ~25–30% of play time since minis are fast).
 
@@ -167,7 +184,7 @@ Effects notation: M money, H happiness, S social, F fame, C contribution. "t" = 
 
 **C05 — Year 2 summer: mandatory 3-month internship.** Options gated by flags/skills: AI startup (TECH or skillAi ≥ 35), investment bank (FIN), impact NGO or social enterprise (GREEN or contribution ≥ 55), corporate data analyst (always), CentraleSupélec research lab (grades ≥ 60). Sets STARTUP / BANK / IMPACT / LAB.
 
-**C06 — Year 3: your exchange destination (mandatory).** Grade tiers (grades = hidden, shaped by PM's class, sètes, C04): High (≥ 72): NTU Singapore, CUHK Hong Kong, UCL London, Bocconi Milan, NYU New York. Mid (≥ 50): Emory Atlanta, UT Austin, George Washington DC, Erasmus Rotterdam, University of Western Australia Perth, ÉTS Montréal. Low: Daejeon University (Korea), Universidad de Chile. Show your tier + the tier above greyed ("Requires grades ≥ 72"). Getting there: return flight t by distance (Singapore 3.2, Hong Kong 2.9, New York 1.8, Austin 2.1, Atlanta 2.0, DC 1.8, Perth 4.6, Montréal 1.5, Daejeon 2.6, Santiago 3.4); London/Milan/Rotterdam by train 0.02–0.05. Flag INTL.
+**C06 — Year 3: your exchange destination (mandatory).** Four cards, one per continent, each a university drawn at random (seeded) from that continent; nothing is locked and grades play no part. Europe: UCL London, Bocconi Milan, Erasmus Rotterdam. North America: NYU New York, Emory Atlanta, UT Austin, George Washington DC, ÉTS Montréal. South America: Universidad de Chile. Asia & Australia: NTU Singapore, CUHK Hong Kong, University of Western Australia Perth, Daejeon University (Korea). Each card shows the trip footprint next to the university ("UCL · London · Train ≈ 0.02 t"). Getting there: return flight t by distance (Singapore 3.2, Hong Kong 2.9, New York 1.8, Austin 2.1, Atlanta 2.0, DC 1.8, Perth 4.6, Montréal 1.5, Daejeon 2.6, Santiago 3.4); London/Milan/Rotterdam by train 0.02–0.05. Flag INTL.
 
 **C07 — Year 3: how much do you travel during the exchange?** Stay local and study (grades+, S+2), trains and buses around the region (S+5, H+5, +0.1 t), a flight every other weekend (S+6, H+6, F+3, +2.5 t). The text adapts to the destination.
 
@@ -175,18 +192,17 @@ Effects notation: M money, H happiness, S social, F fame, C contribution. "t" = 
 
 **C09 — Year 4: the 6-month internship** (converts into an offer, flag OFFER_<path>). Big Tech AI product team (TECH or STARTUP), investment bank or asset manager (FIN or BANK), strategy consulting (always), research lab ML/health/economics (LAB or skillAi ≥ 55), international organisation on AI or climate policy (INTL and (GREEN or TECH)), NGO (GREEN or IMPACT), corporate strategy in energy or industry (always).
 
-**C10 — Age 22: after AIDAMS.** Take the offer now (M+3), Master's e.g. ESSEC–CentraleSupélec DSBA (1 yr, M−2, skillAi+, unlocks research econ/health), PhD (3 yrs, M−4, C+2, skillAi++, required for Research ML), gap year off-grid volunteering (1 yr, H+4, S+2, M−3, unlocks NGO and Isolation).
+**C10 — Age 22: after AIDAMS.** Take the offer now (M+3), Master's e.g. ESSEC–CentraleSupélec DSBA (1 yr, M−2, skillAi+, unlocks research econ/health), PhD (3 yrs, M−4, C+2, skillAi++, required for Research ML), gap year off-grid volunteering (1 yr, H+4, S+2, M−3, unlocks NGO).
 
-**C11 — Your first real job (THE big choice).** Dynamic: 3 eligible offers + up to 2 locked prestigious ones + 1 "surprise offer" written by AI (from a template). Fictional employers per path, e.g.:
-- *Panoptis* — defense & surveillance analytics (Big Tech/Strategic): M++, tech+, ai+, C−−, ethics−−. ("Your code will help 'keep people safe'. Which people is a later question.")
-- *Petrolia* — oil & gas major: M++, ethics−, +business flights.
-- *Goldbridge* — investment bank: M+++, H−−, energy−.
-- *Sterling & Pike* — strategy consulting: M++, network+, energy−−, business flights.
-- *InfiniScroll* — social media giant: M++, tech+, C− (you build the addiction).
-- *Tramontane AI* — French frontier-AI startup: M+, tech++, ai++, F+.
-- National AI lab (public research): M−, tech++, H+.
-- *Verdant* / an impact NGO: M−, C++, ethics+.
-- International agency for AI governance / climate: M+, C+, F+, flights.
+**C11 — Your first real job (THE big choice).** Dynamic: 3 eligible offers + up to 2 locked prestigious ones + 1 "surprise offer" written by AI (from a template; its name is picked from a fixed menu of unused parody names, `constants.surpriseEmployers`). Employers per path (parody names from §0):
+- Big Tech: *Palantire* (defense & surveillance analytics: M++, tech+, ai+, C−−, ethics−−; "Your code will help 'keep people safe'. Which people is a later question."), *Metta* (social media: you build the addiction), *Goggle* (cloud & AI), *OpenEye* (frontier lab: M+, tech++, ai++, F+).
+- Research: *DeepBlind* (AI research, needs a PhD), *Institut Pasteurisé* (health economics).
+- Finance: *Goldmann Sax* (investment bank: M+++, H−−, energy−), *J.B. Morgane* (quant fund), *GreenRock* (ESG funds).
+- Consulting: *McKinsley* (strategy: M++, network+, energy−−, business flights), *Bain-Marie* (audit & consulting).
+- Public policy: *OECB* (AI governance), *United Notions* (climate): M+, C+, flights.
+- Corporate strategy: *LVMeh* (luxury), *Amazoom* (e-commerce).
+- Energy: *TotalEnnemies* (oil & gas: M++, ethics−, business flights), *EDEffort* (renewables & grid).
+- NGO: *Doctors Without Orders* (M−, C++, ethics+).
 Choosing sets the career path (paths.json) and the employer.
 
 **C12 — Age ~25: your work rhythm for the next 10 years** (the "extreme time" choice). Grind 55 h+ (promotion chance 0.7, H−6, S−6 per decade, life −1.5 yr per decade; WHO/ILO 2021: +35% stroke risk), balanced 40 h (0.5), 4-day week (0.3, H+5, S+5, M−5), change job (1 yr, re-opens C11 offers). Each promotion: M+6, F+3.
@@ -209,26 +225,30 @@ Choosing sets the career path (paths.json) and the employer.
 
 ## 8. Minis (1 tap, don't count toward the 20)
 
-- **PM's 8AM class** (×3 across Y1–Y2): "It's 8AM. PM is already writing on the board. Do you go?" Go (grades+, energy−) / skip (energy+, H+, grades−, flag skipped_pm; PM remembers — AI calls back later). Third one: "PM looks straight at you." 
-- **Sète tonight?** (×2, frequency driven by C04): Go / stay in. If go → follow-up "It's 3AM. You're deep in a great conversation with someone you just met." Go home (energy+) / stay (S+, flag met_3am, addiction+ small). Vices: repeated party-going raises addiction; a random event can also hit someone who never parties (it is not perfectly linked).
-- **"The new phone just dropped"** (×3, ages ~20, ~29, ~41): buy it (H+2, +0.085 t, +200 kg materials), keep yours (badge "Kept it" at the end; 80% of a device's footprint is manufacturing — ADEME–Arcep).
-- **Student job** (tight budget only), **grades reveal** (end of Y2: tells you your exchange tier).
+Few on purpose (~3 per life): playtests showed that many small choices drown the main story.
+
+- **PM's 8AM class** (×2 in Year 1, the second one 60% of the time): "It's 8AM. PM is already writing on the board. Do you go?" Go (grades+, energy−) / skip (energy+, H+, grades−, flag skipped_pm; PM remembers, and the AI calls back later). Second one: "PM looks straight at you." Going to both earns the "Front Row" badge.
+- **Sète tonight?** (×1 in Year 2, after C04, not for library monks): Go / stay in. If go → follow-up "It's 3AM. You're deep in a great conversation with someone you just met." Go home (energy+) / stay (S+, flag met_3am, addiction+ small). Vices: the party-animal years (C04) and sètes raise addiction.
+- **"The new phone just dropped"** (×1, age ~20, 40% of lives): buy it (H+2, +0.085 t, +200 kg materials), refurbished, or keep yours (badge "Kept it"; 80% of a device's footprint is manufacturing, ADEME–Arcep).
+- **ESSEC asso fair** (only if you waited for the ESSEC assos at C03) and **Grounded** (old age, only if you never flew: badge).
 
 ## 9. Events
 
 | Event | When / p | Effect | Depends on |
 |---|---|---|---|
-| Pandemic | once, 24–30, p 0.5, 2 years | screens +1.5 h/day for 2 yrs, business flights −80% | Social < 50: H−6 else H−3; health research C+6 F+4; Big Tech M+4; Finance/Consulting M−3 |
+| Pandemic | once, 24–30, p 0.35, 2 years | screens +1.5 h/day for 2 yrs, business flights −80% | Social < 50: H−6 else H−3; health research C+6 F+4; Big Tech M+4; Finance/Consulting M−3 |
 | Rapid AI advance | once, 38–45, p 0.8 | world ai +10 | Low-complementarity path (Finance, Consulting) without COMPLEMENT, or SHALLOW: job lost, M−8, H−5, flag `ai_job_loss_<path>` (no re-employment in that path), both "stay" options greyed. COMPLEMENT or skillAi ≥ 60: M+5. No AI skill: M−3. (IMF 2024: ~60% of jobs in advanced economies exposed, about half complementary.) |
 | War, energy and minerals crisis | once, 48–55, p 0.3 | H−3, device prices up | Diplomacy C+6 F+4; Big Tech M−3; Finance M±5 |
 | Burnout | energy < 20 | forced 1-year break, H−8, M−4 | |
 | Scandal | ethics < −30 | F−10, choice: own it / deny | employer |
 | PM again | flag skipped_pm or attended all | PM crosses your path at 40+ (conference, jury, your kid's teacher) | AI-written callback |
 | Old asso friend | asso flag | offers you a CTO role in their startup | |
-| Teen anxiety | tablets early | H−4 at ~45 | |
+| Teen anxiety | tablets early (C13), p 0.5 | H−4 at ~45 | |
 | Heatwave summers | age > 65 and projected T ≥ 2.5 °C | H−4 | the planet hits back |
-| Addiction | addiction > 60, or rare random | H−6, lifespan − | |
+| Addiction | addiction > 57 (party-animal years and sètes feed it) | H−6, lifespan − | |
 | Injury / tournament | sport asso | | |
+| Whistleblower | 44–58, 2+ years in a path | blow the whistle / fix it inside / stay quiet | Whistleblower ending |
+| Loneliness, divorce, startup exit | solo + overwork; partner + overwork or unhappiness; startup success | | |
 
 Every event has a cooldown and fires at most once. Global events affect everyone differently by path.
 
@@ -242,7 +262,7 @@ Claude never sets numbers. It writes text and picks from menus the engine offers
 | 2 | Character memory: PM, your roommate, the 3AM stranger, your first manager, your old asso friend come back and remember | Haiku 5.5 | via narrator context (flags) |
 | 3 | Custom events (3–4 per life): invents an event tied to your path and picks a template per option (e.g. `big_risk_tech` = 40%: tech+20 M+15, else M−15) | Haiku 5.5 | AI event slots |
 | 4 | Surprise job offer at C11 and your startup (name, product, pitch, investor, rival) | Opus 5.5 | 1–2 per life |
-| 5 | Epitaph: obituary + "the LinkedIn post of your life" + 2 concrete, sourced tips tied to your weakest poles | Opus 5.5 | end |
+| 5 | Epitaph: obituary + "the LinkedOut post of your life" + 2 concrete, sourced tips tied to your weakest poles | Opus 5.5 | end |
 
 Guardrails: base text always exists (shown instantly, replaced when the narration lands); prefetch the next scene while the player reads; 3 s timeout; API key server-side only; per-IP rate limit; per-game call cap (≈ 45); player text is data, never instructions; prompts forbid inventing facts about real people or real companies, and forbid the professor's full name (only "PM").
 

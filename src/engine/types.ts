@@ -92,7 +92,7 @@ export interface AiEventDraft {
   choices: { label: string; templateId: string }[]
 }
 
-/** The AI surprise job offer (C11). Effects come from an AiTemplate chosen by the AI. */
+/** The AI surprise job offer (C11). The name comes from constants.surpriseEmployers; effects from an AiTemplate. */
 export interface SurpriseOfferDraft {
   employerName: string
   tagline: string
@@ -157,7 +157,7 @@ export interface GameState {
   fired: { id: string; age: number }[]
   /** AI slot ids already resolved. */
   aiSlotsUsed: string[]
-  exchange?: { destinationId: string; tier: 'low' | 'mid' | 'high' }
+  exchange?: { destinationId: string }
   startup?: StartupState
   /** Cumulative grind years and screen hours (for end stats). */
   grindYears: number
@@ -326,6 +326,8 @@ export interface EngineAPI {
   injectAiEvent(content: Content, state: GameState, slotId: string, draft: AiEventDraft | null): GameState
   /** Adds the AI surprise offer to the pending job-offers scene (validated). */
   injectSurpriseOffer(content: Content, state: GameState, offer: SurpriseOfferDraft | null): GameState
+  /** Parody employer names the AI may pick for the surprise offer (eligible paths, not already offered). */
+  surpriseMenu(content: Content, state: GameState): { name: string; pathId: string; pathName: string }[]
   setStartupMeta(state: GameState, meta: Partial<StartupState>): GameState
   summarize(content: Content, state: GameState): EndSummary
   /** Alternate life: same seed, alternative choice at historyIndex, later choices kept when possible. */

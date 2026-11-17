@@ -76,12 +76,12 @@ describe('placeholders', () => {
     expect(fillText(content, s, '{name} at {employer} ({path}) in {city}, {country}, {university}; {startup}; {age}')).toBe(
       'Ines at your employer (your career) in your exchange city, abroad, your host university; your startup; 18',
     )
-    s.path = { pathId: 'consulting', employerId: 'sterling', employerName: 'Sterling & Pike', sinceAge: 23 }
-    s.exchange = { destinationId: 'd_ntu', tier: 'high' }
+    s.path = { pathId: 'consulting', employerId: 'sterling', employerName: 'McKinsley', sinceAge: 23 }
+    s.exchange = { destinationId: 'd_ntu' }
     s.startup = { sectorId: 's_climate', name: 'Coolr' }
     s.age = 40
     expect(fillText(content, s, '{name}|{employer}|{path}|{university}|{city}|{country}|{startup}|{age}|{unknown}')).toBe(
-      'Ines|Sterling & Pike|Consulting|NTU|Singapore|Singapore|Coolr|40|{unknown}',
+      'Ines|McKinsley|Consulting|NTU|Singapore|Singapore|Coolr|40|{unknown}',
     )
   })
 })

@@ -81,9 +81,6 @@ const EMPLOYER_EMBLEM: Record<string, Emblem> = {
   petrolia: 'oil',
   voltaire_grid: 'oil',
   verdant: 'ngo',
-  common_ground: 'ngo',
-  sprout_labs: 'ai_startup',
-  la_ferme: 'ngo',
 }
 
 /** Fallback by career path (paths.json ids). */

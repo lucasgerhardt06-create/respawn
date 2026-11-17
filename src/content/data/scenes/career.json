@@ -203,7 +203,7 @@
       },
       {
         "conditions": "path == strategy",
-        "text": "Thirty-three, and {employer} names you lead of its group-wide AI strategy. Every division wants a chatbot. What do you actually build?"
+        "text": "Thirty-three, and {employer} names you lead of its group-wide AI strategy. Every division wants its own ChatGBT. What do you actually build?"
       },
       {
         "conditions": "path == ngo",
@@ -288,7 +288,7 @@
     "age": 36,
     "mandatory": true,
     "title": "Your Online Presence",
-    "text": "Thirty-six. Work chats, family chats and an algorithm that knows you better than your parents do. A colleague with a big following says you 'should really build your brand'. Time to decide your online life for good.",
+    "text": "Thirty-six. Slacker at work, the family group on FaceBuk and an algorithm that knows you better than your parents do. A colleague with a big following says you 'should really build your brand'. Time to decide your online life for good.",
     "art": "home",
     "variants": [
       {
@@ -297,7 +297,7 @@
       },
       {
         "conditions": "flag:phone_intentional",
-        "text": "Thirty-six. You've kept your phone on a short leash since Year 1, but work now lives in chats and your colleague says you 'should really build your brand'. Time to decide your online life for good."
+        "text": "Thirty-six. You've kept your phone on a short leash since Year 1, but work now lives on Slacker and your colleague says you 'should really build your brand'. Time to decide your online life for good."
       }
     ],
     "ai": {
@@ -318,7 +318,7 @@
           "flags": ["personal_brand"],
           "footprint": [{ "label": "Your audience's watch time (influence)", "category": "digital", "influenceTPerYear": 1900, "factId": "f_influence" }],
           "factId": "f_influence",
-          "text": "Your post about 'five lessons from failure' gets two million views. You failed at nothing that week."
+          "text": "Your LinkedOut post about 'five lessons from failure' gets two million views. You failed at nothing that week."
         }
       },
       {
@@ -345,7 +345,7 @@
           "footprint": [{ "label": "Your audience's watch time (influence)", "category": "digital", "influenceTPerYear": 0 }],
           "badges": ["logged_off"],
           "factId": "f_allcott",
-          "text": "Week one, your thumb twitches. Week two, you read a novel. Week three, you call your grandmother."
+          "text": "Goodbye InstaGran, goodbye TikTac. Week one, your thumb twitches. Week two, you read a novel. Week three, you call your grandmother."
         }
       }
     ]
@@ -423,7 +423,7 @@
         "effects": {
           "set": { "workHours": 40 },
           "stats": { "contribution": 10, "happiness": 4, "money": -5, "fame": -1 },
-          "path": { "pathId": "ngo", "employerId": "common_ground" },
+          "path": { "pathId": "ngo", "employerId": "verdant" },
           "flags": ["pivot_impact"],
           "text": "Your salary halves. Your Sunday-evening dread disappears entirely."
         }

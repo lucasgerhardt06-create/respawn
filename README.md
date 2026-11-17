@@ -11,7 +11,7 @@ Every scene is narrated by Claude for *your* life. Every number comes from sourc
 ## What's inside
 | | |
 |---|---|
-| **20 life choices** + ~30 quick moments + ~30 events | `src/content/data/*.json` (no code needed to edit) |
+| **20 life choices** + a few quick moments and events (~28 decisions, ~12 minutes per life) | `src/content/data/*.json` (no code needed to edit) |
 | **RPG character sheet** | Wealth, Happiness, Social, Fame, Impact + Intelligence, Math & AI, Economics, Charisma, Health, Network, Grades, Integrity |
 | **Real physical model** | tonnes of CO2e per choice → temperature, sea level, biodiversity and heat exposure in 2100 (`docs/GAME_DESIGN.md` §4–5) |
 | **Claude narrator** | Haiku 5.5 narrates each scene, Opus 5.5 writes your startup and your epitaph (`docs/AI.md`) |
@@ -40,7 +40,7 @@ The repo is set up for [Claude Code](https://claude.com/claude-code): it reads [
 - *"Run npm run simulate and rebalance whatever strategy dominates."*
 - *"Improve the Earth 2100 reveal animation in src/ui/screens/End.tsx."*
 
-Rules that matter (also in `CLAUDE.md`): English only, **no real company names**, the professor is only ever **"PM"**, locked choices are shown greyed, AI never sets numbers, **never commit a key**.
+Rules that matter (also in `CLAUDE.md`): English only, **no real company names: parodies from the official list** (Goggle, Metta, McKinsley…, `docs/GAME_DESIGN.md` §0), the professor is only ever **"PM"**, locked choices are shown greyed, AI never sets numbers, **never commit a key**.
 
 ## Contribute without coding
 1. Edit a file in [`src/content/data/`](src/content/data) (see [`docs/CONTENT_GUIDE.md`](docs/CONTENT_GUIDE.md)).

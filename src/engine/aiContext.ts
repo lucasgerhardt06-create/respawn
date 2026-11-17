@@ -44,7 +44,7 @@ export function buildAiContext(content: Content, state: GameState): AIContext {
     workRhythm:
       s.workHours >= content.constants.yearly.grindHours ? 'grinding' : s.workHours <= 32 ? 'light' : 'normal',
   }
-  if (student) gauges[STAT_LABELS.grades] = level(s.grades, content.constants.exchange.midMin, content.constants.exchange.highMin, ['weak', 'average', 'strong'])
+  if (student) gauges[STAT_LABELS.grades] = level(s.grades, 50, 72, ['weak', 'average', 'strong'])
   if (s.addiction >= 30) gauges[STAT_LABELS.addiction] = s.addiction >= 60 ? 'serious' : 'some vices'
 
   const ctx: AIContext = {

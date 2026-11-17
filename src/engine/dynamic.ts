@@ -2,10 +2,10 @@
  * Choice lists: static choices (visibleIf / locked) and dynamic ones
  * (assoDraw, exchange, jobOffers, startupSectors), frozen in pending.dynamicChoices.
  */
-import { ASSO_CATEGORIES, EXCHANGE_TIERS } from '../content/schema'
+import { ASSO_CATEGORIES, EXCHANGE_CONTINENTS } from '../content/schema'
 import type { Choice, Content, Destination, Employer, Scene, StartupSector } from '../content/schema'
 import type { PendingX } from './clone'
-import { gradeTier, evaluate } from './conditions'
+import { evaluate } from './conditions'
 import { getScene, indexContent } from './contentIndex'
 import { makeEnv } from './planet'
 import { drawWithoutReplacement } from './rng'
@@ -13,7 +13,6 @@ import type { ChoiceView, GameState, SurpriseOfferDraft } from './types'
 
 export const SURPRISE_CHOICE_ID = 'ai_surprise'
 export const DEFAULT_LOCKED_REASON = 'Not available'
-export const TIER_ABOVE_REASON = 'Requires stronger grades'
 
 function choiceView(content: Content, state: GameState, c: Choice, hintFallback?: string): ChoiceView {
   const locked = !evaluate(c.conditions, makeEnv(content, state))
@@ -45,31 +44,25 @@ function assoDraw(content: Content, state: GameState): ChoiceView[] {
   return out
 }
 
-function destinationHint(d: Destination): string {
-  return `${d.university} · ${d.city}, ${d.country}`
+function formatTonnes(t: number): string {
+  return t < 0.1 ? t.toFixed(2) : t.toFixed(1)
 }
 
-function exchangeOffers(content: Content, state: GameState, count: number, lockedAbove: number): ChoiceView[] {
-  const tier = gradeTier(content, state.stats.grades)
-  const tierIdx = EXCHANGE_TIERS.indexOf(tier)
-  const above = tierIdx < EXCHANGE_TIERS.length - 1 ? EXCHANGE_TIERS[tierIdx + 1] : undefined
-  const pool = content.destinations.filter((d) => d.tier === tier && visible(content, state, d))
-  const offered = drawWithoutReplacement(state, pool, count).map((d) =>
-    choiceView(content, state, d, destinationHint(d)),
-  )
-  if (above && lockedAbove > 0) {
-    const abovePool = content.destinations.filter((d) => d.tier === above && visible(content, state, d))
-    for (const d of drawWithoutReplacement(state, abovePool, lockedAbove)) {
-      offered.push({
-        id: d.id,
-        label: d.label,
-        hint: d.hint ?? destinationHint(d),
-        locked: true,
-        lockedReason: d.lockedReason ?? TIER_ABOVE_REASON,
-      })
-    }
+/** "UCL · London · Train ≈ 0.02 t": the trip footprint is visible before clicking. */
+export function destinationHint(d: Destination): string {
+  const short = d.label.split(',')[0]!.trim()
+  return `${short} · ${d.city} · ${d.byTrain ? 'Train' : 'Plane'} ≈ ${formatTonnes(d.tripT)} t`
+}
+
+/** One destination per continent (seeded draw), nothing locked: grades play no part. */
+function exchangeOffers(content: Content, state: GameState): ChoiceView[] {
+  const out: ChoiceView[] = []
+  for (const continent of EXCHANGE_CONTINENTS) {
+    const pool = content.destinations.filter((d) => d.continent === continent && visible(content, state, d))
+    const [pick] = drawWithoutReplacement(state, pool, 1)
+    if (pick) out.push({ id: pick.id, label: pick.label, hint: destinationHint(pick), locked: false })
   }
-  return offered
+  return out
 }
 
 export function bannedReason(field: string): string {
@@ -133,7 +126,7 @@ export function buildDynamicChoices(content: Content, state: GameState, scene: S
       dyn = assoDraw(content, state)
       break
     case 'exchange':
-      dyn = exchangeOffers(content, state, d.count, d.lockedFromTierAbove)
+      dyn = exchangeOffers(content, state)
       break
     case 'jobOffers':
       dyn = jobOffers(content, state, d.count, d.lockedCount, d.paths)

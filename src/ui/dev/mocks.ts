@@ -124,10 +124,10 @@ export const sceneJobs: SceneView = {
   art: 'bigtech',
   narrate: true,
   choices: [
-    { id: 'emp_tramontane', label: 'Tramontane AI, French frontier-AI startup', hint: 'Equity and chaos', locked: false },
-    { id: 'emp_verdant', label: 'Verdant, an impact NGO', locked: false },
-    { id: 'emp_sterling', label: 'Sterling & Pike, strategy consulting', locked: false },
-    { id: 'emp_goldbridge', label: 'Goldbridge, investment bank', locked: true, lockedReason: 'Requires Economics 60+' },
+    { id: 'emp_tramontane', label: 'OpenEye, the frontier-AI lab', hint: 'Equity and chaos', locked: false },
+    { id: 'emp_verdant', label: 'Doctors Without Orders, an impact NGO', locked: false },
+    { id: 'emp_sterling', label: 'McKinsley, strategy consulting', locked: false },
+    { id: 'emp_goldbridge', label: 'Goldmann Sax, investment bank', locked: true, lockedReason: 'Requires Economics 60+' },
     { id: 'ai_surprise', label: 'Hydra Grid, an AI start-up for power grids', hint: 'A recruiter slid into your DMs', locked: false },
   ],
   isFollowUp: false,
@@ -239,12 +239,12 @@ export const mockSummary: EndSummary = {
       historyIndex: 10,
       sceneId: 'c11_first_job',
       title: 'Your first real job',
-      chosenLabel: 'Sterling & Pike, strategy consulting',
+      chosenLabel: 'McKinsley, strategy consulting',
       age: 23,
       impact: 80,
       alternatives: [
-        { id: 'emp_tramontane', label: 'Tramontane AI' },
-        { id: 'emp_verdant', label: 'Verdant, an impact NGO' },
+        { id: 'emp_tramontane', label: 'OpenEye' },
+        { id: 'emp_verdant', label: 'Doctors Without Orders, an impact NGO' },
       ],
     },
     {
@@ -276,7 +276,7 @@ export const mockSummary: EndSummary = {
     { id: 'kept_it', label: 'Kept it', description: 'You kept your phone instead of buying the new one.' },
     { id: 'pm_regular', label: "PM's regular", description: 'Never missed an 8AM class.' },
   ],
-  path: { pathName: 'Consulting', employerName: 'Sterling & Pike' },
+  path: { pathName: 'Consulting', employerName: 'McKinsley' },
   stats: mockStats,
   flags: ['asso_automatants'],
 }
@@ -300,7 +300,7 @@ export const mockEpitaph: Epitaph = {
 export const mockRespawn: RespawnResult = {
   historyIndex: 10,
   altChoiceId: 'emp_verdant',
-  altLabel: 'Verdant, an impact NGO',
+  altLabel: 'Doctors Without Orders, an impact NGO',
   summary: {
     ...mockSummary,
     deathAge: 87,

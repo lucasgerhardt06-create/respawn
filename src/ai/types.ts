@@ -45,9 +45,10 @@ export interface AIClient {
     previous?: { title: string; choiceLabel: string; consequence?: string },
   ): Promise<Narration | null>
   generateEvent(ctx: AIContext, templates: AiTemplate[]): Promise<AiEventDraft | null>
+  /** `employers`: the fixed parody menu from engine.surpriseMenu (the model picks one, never invents). */
   generateSurpriseOffer(
     ctx: AIContext,
-    paths: { id: string; name: string }[],
+    employers: { name: string; pathId: string; pathName: string }[],
     templates: AiTemplate[],
   ): Promise<SurpriseOfferDraft | null>
   generateStartup(ctx: AIContext, sector: { id: string; label: string }): Promise<StartupMeta | null>

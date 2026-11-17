@@ -138,6 +138,21 @@ export function playLife(content: Content, seed: number, opts: LifeOptions = {})
   throw new Error(`life did not end (seed ${seed})`)
 }
 
+export type DecisionCounts = Record<Decision['kind'] | 'total', number>
+
+/** Every decision of a life (single-option ones included), split by scene kind. */
+export function countDecisions(content: Content, seed: number, strategy: Strategy = 'random'): DecisionCounts {
+  const c: DecisionCounts = { major: 0, mini: 0, event: 0, total: 0 }
+  playLife(content, seed, {
+    strategy,
+    onDecision: (d) => {
+      c[d.kind]++
+      c.total++
+    },
+  })
+  return c
+}
+
 export function quantile(sorted: number[], q: number): number {
   if (sorted.length === 0) return Number.NaN
   const i = Math.min(sorted.length - 1, Math.max(0, Math.round(q * (sorted.length - 1))))

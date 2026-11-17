@@ -7,7 +7,7 @@ const FORBIDDEN = [
   'Palantir', 'Google', 'Alphabet', 'Meta', 'Facebook', 'Instagram', 'WhatsApp', 'TikTok', 'Snapchat', 'LinkedIn',
   'Twitter', 'YouTube', 'Netflix', 'Spotify', 'OpenAI', 'ChatGPT', 'GPT-4', 'Mistral', 'Anthropic', 'DeepMind',
   'Apple', 'iPhone', 'Samsung', 'Huawei', 'Amazon', 'Microsoft', 'Nvidia', 'Tesla', 'SpaceX', 'Uber', 'Airbnb',
-  'Deliveroo', 'Slack', 'Kaggle', 'Goldman', 'Morgan Stanley', 'JPMorgan', 'BlackRock', 'McKinsey', 'BCG', 'Bain',
+  'Deliveroo', 'Slack', 'Kaggle', 'Goldman', 'Morgan Stanley', 'JPMorgan', 'BlackRock', 'McKinsey', 'BCG', 'Bain & Company',
   'Deloitte', 'KPMG', 'PwC', 'Accenture', 'TotalEnergies', 'ExxonMobil', 'Exxon', 'Chevron', 'BNP', 'Société Générale',
   'LVMH', 'Kering', 'Airbus', 'Thales', 'Dassault', 'Safran', 'EDF', 'Engie', 'Ryanair', 'Air France', 'Doctolib',
   'BlaBlaCar', 'Station F', 'Burning Man', 'Bitcoin', 'Ethereum',
@@ -254,6 +254,7 @@ describe('content bundle', () => {
     expect(content.startupSectors).toHaveLength(6)
     expect(content.facts.length).toBeGreaterThanOrEqual(25)
     expect(content.profiles.names.length).toBeGreaterThanOrEqual(24)
-    expect(content.constants.aiEventSlots).toHaveLength(3)
+    // One AI event per life (pacing: ≤ 28 decisions per life, see tools/pacing.test.ts).
+    expect(content.constants.aiEventSlots).toHaveLength(1)
   })
 })
